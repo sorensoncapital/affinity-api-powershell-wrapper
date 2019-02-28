@@ -1,4 +1,4 @@
-$ModuleManifestName = 'AffinityPublicAPI.psd1'
+$ModuleManifestName = 'AffinityAPI.psd1'
 $ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
 
 Describe 'Module Manifest Tests' {

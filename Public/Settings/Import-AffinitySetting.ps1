@@ -16,7 +16,7 @@
 function Import-AffinitySetting {
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'AutoName')]
-    [OutputType([string])]
+    [OutputType([bool])]
     param (
         # AutoName: Settings Director
         [Parameter(Mandatory = $true,
@@ -35,17 +35,24 @@ function Import-AffinitySetting {
 
     process {
         switch ($PSCmdlet.ParameterSetName) {
-            'AutoName' { $ImportPath = Join-Path -Path (Get-AffinitySettingsDir) -ChildPath (Get-AffinitySettingName -UserName $UserName) }
-            'ManualName' { $ImportPath = $SettingPath }
-            Default {}
+            'AutoName' { 
+                $ImportPath = Join-Path -Path (Get-AffinitySettingDir) `
+                                        -ChildPath (Get-AffinitySettingName -UserName $UserName)
+            }
+            'ManualName' { 
+                $ImportPath = $SettingPath
+            }
+            Default { <# Throw error #>}
         }
 
         if (Test-Path $ImportPath) { 
             $ImportedSetting = Import-Clixml -LiteralPath $ImportPath
-            Set-AffinitySetting -Credentials $ImportedSetting.Credentials -Url $ImportedSetting.Url
+            
+            if ($ImportedSetting.Module -ilike $MyInvocation.MyCommand.ModuleName) {
+                Set-AffinitySetting -Credentials $ImportedSetting.Credentials -Url $ImportedSetting.Url
+            }
+            else { throw [System.NotSupportedException] ("Setting for different module {0}" -f $ImportedSetting.Module) }
         }
-        else {
-            # Throw error 
-        }
+        else { throw [System.IO.FileNotFoundException] "Setting failed to be imported" }
     }
 }

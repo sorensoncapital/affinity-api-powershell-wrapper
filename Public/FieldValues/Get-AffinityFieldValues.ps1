@@ -98,7 +98,7 @@ function Get-AffinityFieldValues
                 $fieldvalue = @{
                     'field_id' = $fieldheader.id
                     'value_type' = $fieldheader.value_type
-                    'value_type_name' = $AffinityFieldValueTypes[$fieldheader.value_type]
+                    'value_type_name' = $AffinityStandardFieldValueTypes[$fieldheader.value_type]
                     'allows_multiple' = $fieldheader.allows_multiple
                 }
 

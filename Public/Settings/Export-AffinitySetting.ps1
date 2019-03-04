@@ -18,12 +18,12 @@ function Export-AffinitySetting {
                    DefaultParameterSetName = 'AutoName')]
     [OutputType([string])]
     param (
-        # AutoName: Settings Director
+        # AutoName: Settings Directory
         [Parameter(Mandatory = $false,
                    ParameterSetName = 'AutoName',
                    Position = 0)]
         [string]
-        $SettingsDir = (Get-AffinitySettingsDir),
+        $SettingsDir = (Get-AffinitySettingDir),
 
         # AutoName: Setting Name
         [Parameter(Mandatory = $false,
@@ -37,26 +37,35 @@ function Export-AffinitySetting {
                    ParameterSetName = 'ManualName',
                    Position = 0)]
         [string]
-        $SettingPath
+        $SettingPath,
+
+        # Credential
+        [Parameter(Mandatory = $false,
+                   Position = 1)]
+        [ValidateScript({
+            if ($_.Password) { $true }
+            else { $false }
+        })] 
+        [pscredential]
+        $Credentials = $AffinityCredentials
     )
 
     process {
         switch ($PSCmdlet.ParameterSetName) {
             'AutoName' { $ExportPath = Join-Path -Path $SettingsDir -ChildPath $SettingName }
             'ManualName' { $ExportPath = $SettingPath }
-            Default {}
+            Default { <# Throw error #> }
         }
 
         New-Item -Path $ExportPath -Force | Out-Null
 
         @{
-            'Credentials' = $AffinityCredentials
-            'Url' = $AffinityBaseUrl
+            'Module'        = $MyInvocation.MyCommand.ModuleName
+            'Credentials'   = $Credentials
+            'Url'           = $AffinityBaseUrl
         } | Export-Clixml -Path $ExportPath -Force | Out-Null
 
         if (Test-Path $ExportPath) { return $ExportPath }
-        else {
-            # Throw error 
-        }
+        else { throw [System.IO.FileNotFoundException] "Setting failed to be exported" }
     }
 }

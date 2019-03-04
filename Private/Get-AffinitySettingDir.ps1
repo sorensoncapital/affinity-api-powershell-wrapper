@@ -13,9 +13,6 @@
    General notes
 #>
 
-function Get-AffinitySettingsDir {
-    [CmdletBinding()]
-    param ( )
-    
+function Get-AffinitySettingDir {  
     process { (Join-Path -Path (Get-Location) -ChildPath 'settings') }
 }

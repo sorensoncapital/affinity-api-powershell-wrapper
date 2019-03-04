@@ -22,5 +22,5 @@ function Get-AffinitySettingName {
         $UserName
     )
     
-    process { ($env:COMPUTERNAME + "_" + $env:USERNAME + "_" + $UserName + ".cred")  }
+    process { ($MyInvocation.MyCommand.ModuleName + "_" + $env:COMPUTERNAME + "_" + $env:USERNAME + "_" + $UserName + ".cred") }
 }

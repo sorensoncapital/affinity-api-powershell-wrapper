@@ -18,17 +18,27 @@ function Import-AffinitySetting {
                    DefaultParameterSetName = 'AutoName')]
     [OutputType([bool])]
     param (
-        # AutoName: Settings Director
-        [Parameter(Mandatory = $true,
+        # AutoName: Settings Directory
+        [Parameter(Mandatory = $false,
                    ParameterSetName = 'AutoName',
                    Position = 0)]
+        [ValidateNotNullOrEmpty()]
         [string]
-        $UserName,
+        $SettingDir = (Get-AffinitySettingDir),
+
+        # AutoName: Username
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'AutoName',
+                   Position = 1)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $SettingUserName,
 
         # ManualName: Path
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'ManualName',
                    Position = 0)]
+        [ValidateNotNullOrEmpty()]
         [string]
         $SettingPath
     )
@@ -36,13 +46,13 @@ function Import-AffinitySetting {
     process {
         switch ($PSCmdlet.ParameterSetName) {
             'AutoName' { 
-                $ImportPath = Join-Path -Path (Get-AffinitySettingDir) `
-                                        -ChildPath (Get-AffinitySettingName -UserName $UserName)
+                $ImportPath = Join-Path -Path $SettingDir `
+                                        -ChildPath (Get-AffinitySettingName -SettingUserName $SettingUserName)
             }
             'ManualName' { 
                 $ImportPath = $SettingPath
             }
-            Default { <# Throw error #>}
+            Default { <# Throw error #> }
         }
 
         if (Test-Path $ImportPath) { 

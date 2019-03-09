@@ -18,43 +18,43 @@ function Export-AffinitySetting {
                    DefaultParameterSetName = 'AutoName')]
     [OutputType([string])]
     param (
+        # Credential
+        [Parameter(Mandatory = $false,
+                   Position = 0)]
+        [ValidateNotNullOrEmpty()]
+        [pscredential]
+        $Credentials = $AffinityCredentials,
+
         # AutoName: Settings Directory
         [Parameter(Mandatory = $false,
                    ParameterSetName = 'AutoName',
-                   Position = 0)]
+                   Position = 1)]
+        [ValidateNotNullOrEmpty()]
         [string]
-        $SettingsDir = (Get-AffinitySettingDir),
+        $SettingDir = (Get-AffinitySettingDir),
 
         # AutoName: Setting Name
         [Parameter(Mandatory = $false,
                    ParameterSetName = 'AutoName',
-                   Position = 1)]
+                   Position = 2)]
+        [ValidateNotNullOrEmpty()]
         [string]
-        $SettingName = (Get-AffinitySettingName -UserName $AffinityCredentials.UserName),
+        $SettingName = (Get-AffinitySettingName -SettingUserName $AffinityCredentials.UserName),
 
         # ManualName: Path
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'ManualName',
-                   Position = 0)]
-        [string]
-        $SettingPath,
-
-        # Credential
-        [Parameter(Mandatory = $false,
                    Position = 1)]
-        [ValidateScript({
-            if ($_.Password) { $true }
-            else { $false }
-        })] 
-        [pscredential]
-        $Credentials = $AffinityCredentials
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $SettingPath
     )
 
     process {
         switch ($PSCmdlet.ParameterSetName) {
-            'AutoName' { $ExportPath = Join-Path -Path $SettingsDir -ChildPath $SettingName }
-            'ManualName' { $ExportPath = $SettingPath }
-            Default { <# Throw error #> }
+            'AutoName'      { $ExportPath = Join-Path -Path $SettingDir -ChildPath $SettingName }
+            'ManualName'    { $ExportPath = $SettingPath                                        }
+            Default         { <# Throw error #>                                                 }
         }
 
         New-Item -Path $ExportPath -Force | Out-Null

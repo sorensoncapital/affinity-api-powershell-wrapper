@@ -36,6 +36,7 @@ function Invoke-AffinityAPIRequest
         # Affinity API Base URL
         [Parameter(Mandatory = $false,
                    Position = 2)]
+        [ValidateNotNullOrEmpty()]
         [string]
         $AffinityBaseUrl = $AffinityStandardBaseUrl,
 

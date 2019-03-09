@@ -20,18 +20,17 @@ function Set-AffinitySetting {
         # Credentials
         [Parameter(Mandatory = $false,
                    Position = 0)]
+        [ValidateNotNullOrEmpty()]
         [pscredential]
         $Credentials = (
-            Get-Credential -Title 'Affinity API Key' `
-                           -Message 'Please enter Affinity user name and API key'
-                           
+            Get-Credential -Title   'Affinity API Key' `
+                           -Message 'Please enter Affinity user name and API key'                      
         ),
 
         # Url
         [Parameter(Mandatory = $false,
                    Position = 1)]
-        [Alias('AffinityUrl')]
-        [Alias('AffinityBaseUrl')]
+        [ValidateNotNullOrEmpty()]
         [string]
         $Url = $AffinityStandardBaseUrl
     )

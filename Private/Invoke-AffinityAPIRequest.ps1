@@ -20,7 +20,7 @@ function Invoke-AffinityAPIRequest
     Param
     (
         # Affinity Credentials
-        [Parameter(Mandatory = $false, 
+        [Parameter(Mandatory = $false,
                    Position = 0)]
         [ValidateNotNullorEmpty()]
         [pscredential]
@@ -31,7 +31,7 @@ function Invoke-AffinityAPIRequest
                    Position = 1)]
         [ValidateNotNullorEmpty()]
         [Microsoft.PowerShell.Commands.WebRequestMethod]
-        $Method=[Microsoft.PowerShell.Commands.WebRequestMethod]::Get,
+        $Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get,
 
         # Affinity API Base URL
         [Parameter(Mandatory = $false,
@@ -58,7 +58,7 @@ function Invoke-AffinityAPIRequest
         # Strip username (Affinity currently accepts any username, PWSH will not accept a null or empty UserName)
         if ($Credentials.UserName) {
             $Credentials = New-Object System.Management.Automation.PSCredential -ArgumentList (
-                [pscustomobject] @{ 
+                [pscustomobject] @{
                     UserName = ' '
                     Password = $Credentials.Password
                 }
@@ -66,10 +66,23 @@ function Invoke-AffinityAPIRequest
         }
     }
     Process {
-        Invoke-RestMethod -Uri ("{0}/{1}" -f $AffinityBaseUrl, $Fragment) `
-                          -Body $Content `
-                          -Authentication Basic `
-                          -Credential $Credentials `
-                          -Method $Method
+        $IRMParameters = @{
+            'Method'            = $Method
+            'Uri'               = ("{0}/{1}" -f $AffinityBaseUrl, $Fragment)
+            'Authentication'    = 'Basic'
+            'Credential'        = $Credentials
+        }
+
+        if ($Content) {
+            if (Find-NestedContainer $Content) {
+                $IRMParameters.Add('Body'       ,   ($Content | ConvertTo-Json) )
+                $IRMParameters.Add('ContentType',   'application/json'          )
+            }
+            else {
+                $IRMParameters.Add('Body'       ,   $Content                    )
+            }
+        }
+
+        Invoke-RestMethod @IRMParameters
     }
 }

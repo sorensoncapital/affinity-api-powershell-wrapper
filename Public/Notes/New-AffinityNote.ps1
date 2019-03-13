@@ -17,7 +17,7 @@
 function New-AffinityNote
 {
     [CmdletBinding(PositionalBinding = $true,
-                   DefaultParamterSetName = 'Content',
+                   DefaultParameterSetName = 'Content',
                    HelpUri = 'https://api-docs.affinity.co/#create-a-new-note')]
     [OutputType([String])]
     Param
@@ -37,7 +37,7 @@ function New-AffinityNote
         $GmailID,
 
         # Affinity person_ids
-        [Parameter(Mandatory = $false, 
+        [Parameter(Mandatory = $false,
                    Position = 1)]
         [int[]]
         $PersonIDs,
@@ -55,13 +55,13 @@ function New-AffinityNote
         $OpportunityIDs,
 
         # Affinity creator_id
-        [Parameter(Mandatory = $false, 
+        [Parameter(Mandatory = $false,
                    Position = 4)]
         [int]
         $CreatorID,
 
         # Affinity created_at
-        [Parameter(Mandatory = $false, 
+        [Parameter(Mandatory = $false,
                    Position = 5)]
         [datetime]
         $CreatedAt
@@ -72,7 +72,7 @@ function New-AffinityNote
         switch ($PSCmdlet.ParameterSetName) {
            'Content'            { $Content = @{ 'content' =         $NoteContent             } }
            'GmailID'            { $Content = @{ 'gmail_id' =        $GmailID                 } }
-           Default              { <# Throw Error #> }
+           Default              { <# Throw Error #>                                            }
         }
 
         # Add optional parameters

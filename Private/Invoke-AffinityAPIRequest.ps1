@@ -16,7 +16,7 @@ function Invoke-AffinityAPIRequest
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co')]
-    [OutputType([PSCustomObject])]
+    [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity Credentials
@@ -73,9 +73,10 @@ function Invoke-AffinityAPIRequest
             'Credential'        = $Credentials
         }
 
+        # Handle content
         if ($Content) {
-            if (Find-NestedContainer $Content) {
-                $IRMParameters.Add('Body'       ,   ($Content | ConvertTo-Json) )
+            if (Test-NestedContainer $Content) {
+                $IRMParameters.Add('Body'       ,   ($Content | ConvertTo-Json) ) # May need to set -Depth
                 $IRMParameters.Add('ContentType',   'application/json'          )
             }
             else {
@@ -83,6 +84,7 @@ function Invoke-AffinityAPIRequest
             }
         }
 
+        # Splat parameters
         Invoke-RestMethod @IRMParameters
     }
 }

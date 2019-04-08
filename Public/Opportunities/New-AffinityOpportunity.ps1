@@ -22,19 +22,19 @@ function New-AffinityOpportunity
     Param
     (
         # Affinity opportunity name
-        [Parameter(Mandatory = $true, 
+        [Parameter(Mandatory = $true,
                    Position = 0)]
         [string]
         $OpportunityName,
 
         # Affinity list_id
-        [Parameter(Mandatory = $true, 
+        [Parameter(Mandatory = $true,
                    Position = 1)]
         [int]
         $ListID,
 
         # Affinity person_ids
-        [Parameter(Mandatory = $false, 
+        [Parameter(Mandatory = $false,
                    Position = 2)]
         [int[]]
         $PersonIDs,
@@ -54,8 +54,8 @@ function New-AffinityOpportunity
         }
 
         # Add optional parameters
-        if ($PersonIDs)         { $Content.Add('person_ids',        $PersonIDs      ) }
-        if ($OrganizationIDs)   { $Content.Add('organization_ids',  $OrganizationIDs) }
+        if ($PersonIDs)         { $Content.Add( 'person_ids',        $PersonIDs       ) }
+        if ($OrganizationIDs)   { $Content.Add( 'organization_ids',  $OrganizationIDs ) }
 
         Invoke-AffinityAPIRequest -Method Post -Fragment "opportunities" -Content $Content
     }

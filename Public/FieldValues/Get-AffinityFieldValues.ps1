@@ -43,7 +43,7 @@ function Get-AffinityFieldValues
     )
 
     Begin {
-        # Check simple cache     
+        # Check simple cache
         if (!$Affinity_Last_List.fields) { <# Get Affinity List. Most likely need to move this to params #> }
 
         # Get list field headers
@@ -61,22 +61,22 @@ function Get-AffinityFieldValues
 
         if ($OrganizationID) {
             # Check simple cache
-            if (!$Affinity_Last_OrganizationGlobalFieldHeaders) { Get-AffinityOrganizationGlobalFieldHeaders | Out-Null }   
-            
+            if (!$Affinity_Last_OrganizationGlobalFieldHeaders) { Get-AffinityOrganizationGlobalFieldHeaders | Out-Null }
+
             # Combine all field headers
             $FieldHeaders = $FieldHeaders + $Affinity_Last_OrganizationGlobalFieldHeaders
 
             # Retrieve field values for OrganizationID
             $FieldValues = Invoke-AffinityAPIRequest -Method Get -Fragment ("field-values?organization_id={0}" -f $OrganizationID)
         } elseif ($OpportunityID) {
-            # Returns Fields 
+            # Returns Fields
             $FieldValuesWithHeaders = Get-AffinityOpportunity -OpportunityID $OpportunityID
 
             # Retreive field values for OpportunityID
             $FieldValues = Invoke-AffinityAPIRequest -Method Get -Fragment ("field-values?opportunity_id={0}" -f $OpportunityID)
         } elseif ($ListEntryID) {
             # Retreive field values for OpportunityID
-            $FieldValues = Invoke-AffinityAPIRequest -Method Get -Fragment ("field-values?list_entry_id={0}" -f $ListEntryID)            
+            $FieldValues = Invoke-AffinityAPIRequest -Method Get -Fragment ("field-values?list_entry_id={0}" -f $ListEntryID)
         }
 
         # Instantiate output hashtable
@@ -84,11 +84,11 @@ function Get-AffinityFieldValues
 
         # Really need to refactor this code ...
         # Investigate using Join-Object (https://www.powershellgallery.com/packages/Join/2.3.1) then Group-Object
-        
+
         # Reformat Headers with Values
         if ($FieldValuesWithHeaders) {
             foreach ($field in $FieldValuesWithHeaders) {
-                
+
             }
         }
 
@@ -102,8 +102,11 @@ function Get-AffinityFieldValues
                     'allows_multiple' = $fieldheader.allows_multiple
                 }
 
-                if ($fieldheader.list_id -or $fieldheader.list_name) {
+                if ($fieldheader.list_id) {
                     $fieldvalue.Add('list_id', $fieldheader.list_id)
+                }
+
+                if ($fieldheader.list_name) {
                     $fieldvalue.Add('list_name', $fieldheader.list_name)
                 }
 

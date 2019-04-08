@@ -39,13 +39,14 @@ function Get-AffinityList
         if ($ListName) {
             # Refresh simple cache
             if (!$Script:Affinity_Last_Lists) { Get-AffinityLists | Out-Null }
-            
-            $ListID = $Affinity_Last_Lists | Where-Object { $_.name -like $ListName } | Select-Object -First 1 -ExpandProperty 'id'    
+
+            $ListID = $Affinity_Last_Lists | Where-Object { $_.name -like $ListName } | Select-Object -First 1 -ExpandProperty 'id'
         }
-        
-        # Do a separate API call (instead of filtering the List collection) in order to get the .fields[] subarray and all output is congruent
+
+        # Do a separate API call (instead of filtering the List collection) in order to get the .fields[] subarray
+        # This way all output is congruent
         $Script:Affinity_Last_List = Invoke-AffinityAPIRequest -Method Get -Fragment ("lists/{0}" -f $ListID)
 
-        return $Affinity_Last_Lists 
+        return $Affinity_Last_Lists
     }
 }

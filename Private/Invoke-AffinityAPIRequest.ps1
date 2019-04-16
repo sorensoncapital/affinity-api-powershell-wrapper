@@ -69,15 +69,16 @@ function Invoke-AffinityAPIRequest
         $IRMParameters = @{
             'Method'            = $Method
             'Uri'               = ("{0}/{1}" -f $AffinityBaseUrl, $Fragment)
-            'Authentication'    = 'Basic'
             'Credential'        = $Credentials
         }
+
+        if ($PSVersionTable.PSVersion.Major -ge 6 ) { $IRMParameters.Add( 'Authentication', 'Basic' ) }
 
         # Handle content
         if ($Content) {
             if (Test-NestedContainer $Content) {
-                $IRMParameters.Add('Body'       ,   ($Content | ConvertTo-Json) ) # May need to set -Depth
-                $IRMParameters.Add('ContentType',   'application/json'          )
+                $IRMParameters.Add('Body'       ,   ($Content | ConvertTo-Json -Compress -Depth 10) )
+                $IRMParameters.Add('ContentType',   'application/json'                              )
             }
             else {
                 $IRMParameters.Add('Body'       ,   $Content                    )

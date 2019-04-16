@@ -12,10 +12,10 @@
 RootModule = 'AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.6'
+ModuleVersion = '0.0.7'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+CompatiblePSEditions = @('Core')
 
 # ID used to uniquely identify this module
 GUID = 'beb53780-684b-4f30-8596-339bcbb0afe6'
@@ -30,10 +30,10 @@ CompanyName = 'Sorenson Capital'
 Copyright = '(c) 2019 Sorenson Capital. All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'Provides a Powershell wrapper for the API published by Affinity (https://www.affinity.co)'
 
 # Minimum version of the Windows PowerShell engine required by this module
-PowerShellVersion = '6.0'
+PowerShellVersion = '5.0'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''

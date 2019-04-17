@@ -12,10 +12,10 @@
 RootModule = 'AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.7'
+ModuleVersion = '0.0.8'
 
 # Supported PSEditions
-CompatiblePSEditions = @('Core')
+CompatiblePSEditions = @('Desktop', 'Core')
 
 # ID used to uniquely identify this module
 GUID = 'beb53780-684b-4f30-8596-339bcbb0afe6'
@@ -33,7 +33,7 @@ Copyright = '(c) 2019 Sorenson Capital. All rights reserved.'
 Description = 'Provides a Powershell wrapper for the API published by Affinity (https://www.affinity.co)'
 
 # Minimum version of the Windows PowerShell engine required by this module
-PowerShellVersion = '5.0'
+PowerShellVersion = '5.1'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''
@@ -69,10 +69,30 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @()
+FunctionsToExport = @(
+    Get-AffinityFieldValues
+    New-AffinityFieldValue
+    Remove-AffinityFieldValue
+    Set-AffinityFieldValue
+    Get-AffinityListEntries
+    Get-AffinityList
+    Get-AffinityLists
+    Get-AffinityNote
+    Get-AffinityNotes
+    New-AffinityNote
+    Find-AffinityOpportunity
+    Get-AffinityOpportunity
+    New-AffinityOpportunity
+    Remove-AffinityOpportunity
+    Set-AffinityOpportunity
+    Get-AffinityOrganizationGlobalFieldHeaders
+    Export-AffinitySetting
+    Import-AffinitySetting
+    Set-AffinitySetting
+)
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = '*'
+CmdletsToExport = @()
 
 # Variables to export from this module
 VariablesToExport = @()

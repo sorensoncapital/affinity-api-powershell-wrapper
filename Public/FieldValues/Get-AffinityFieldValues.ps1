@@ -169,7 +169,7 @@ function Get-AffinityFieldValues
                                             Select-Object @{N='field_value_id'; E={$_.id}}, @{N='field_value'; E={$_.value}}
 
                         $fieldvalue.Add('field_values', $multiplefieldvalues)
-                        Remove-Variable multiplefieldvalues
+                        $multiplefieldvalues = $null
                     }
                     else {
                         $singlefieldvalue = $FieldValues | `
@@ -178,20 +178,18 @@ function Get-AffinityFieldValues
 
                         $fieldvalue.Add('field_value_id', $singlefieldvalue.id)
                         $fieldvalue.Add('field_value', $singlefieldvalue.value)
-                        Remove-Variable singlefieldvalue
+                        $singlefieldvalue = $null
                     }
 
                     $FieldValuesOutput.Add($fieldheader.name, $fieldvalue)
-                    Remove-Variable fieldvalue
+                    $fieldvalue = @{}
                 }
 
-                Remove-Variable FieldHeaders, FieldValues
+                $FieldHeaders = $FieldValues = $null
             }
 
             return $FieldValuesOutput
         }
-        else {
-            return $FieldValues
-        }
+        else { return $FieldValues }
     }
 }

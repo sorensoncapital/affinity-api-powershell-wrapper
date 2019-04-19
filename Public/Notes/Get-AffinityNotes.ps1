@@ -17,7 +17,7 @@ function Get-AffinityNotes
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'AllNotes',
                    HelpUri = 'https://api-docs.affinity.co/#get-all-notes')]
-    [OutputType([Array])]
+    [OutputType([array])]
     Param
     (
         # Affinity person_id
@@ -27,7 +27,7 @@ function Get-AffinityNotes
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'PersonIDNotes')]
-        [int]
+        [long]
         $PersonID,
 
         # Affinity organization_id
@@ -37,7 +37,7 @@ function Get-AffinityNotes
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'OrganizationIDNotes')]
-        [int]
+        [long]
         $OrganizationID,
 
         # Affinity opportunity_id
@@ -47,7 +47,7 @@ function Get-AffinityNotes
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'OpportunityIDNotes')]
-        [int]
+        [long]
         $OpportunityID,
 
         # Affinity creator_id
@@ -57,11 +57,11 @@ function Get-AffinityNotes
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'CreatorIDNotes')]
-        [int]
+        [long]
         $CreatorID
     )
 
-    Process { 
+    Process {
         if ($PersonID -or $OrganizationID -or $OpportunityID -or $CreatorID) {
             $Content = @{ }
             if     ($PersonID)          { $Content.Add( 'person_id',        $PersonID       ) }

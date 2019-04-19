@@ -17,21 +17,21 @@ function Get-AffinityListEntries
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'ListName',
                    HelpUri = 'https://api-docs.affinity.co/#get-all-list-entries')]
-    [OutputType([Array])]
+    [OutputType([array])]
     Param
     (
         # Affinity List Name
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'ListName')]
-        [String]
+        [string]
         $ListName,
 
         # Affinity list_id
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'ListID')]
-        [Int]
+        [long]
         $ListID
     )
 
@@ -42,6 +42,6 @@ function Get-AffinityListEntries
             $ListID = $Affinity_Last_List.id
         }
 
-        Invoke-AffinityAPIRequest -Method Get -Fragment ("lists/{0}/list-entries" -f $ListID)    
+        Invoke-AffinityAPIRequest -Method Get -Fragment ("lists/{0}/list-entries" -f $ListID)
     }
 }

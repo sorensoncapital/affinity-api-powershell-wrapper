@@ -16,13 +16,13 @@ function Get-AffinityOpportunity
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#get-a-specific-opportunity')]
-    [OutputType([Array])]
+    [OutputType([hashtable])]
     Param
     (
         # Affinity Opportunity ID
         [Parameter(Mandatory = $true,
                    Position = 0)]
-        [int]
+        [long]
         $OpportunityID
     )
 

@@ -18,7 +18,7 @@ function New-AffinityOpportunity
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#create-a-new-opportunity')]
-    [OutputType([String])]
+    [OutputType([hashtable])]
     Param
     (
         # Affinity opportunity name
@@ -30,19 +30,19 @@ function New-AffinityOpportunity
         # Affinity list_id
         [Parameter(Mandatory = $true,
                    Position = 1)]
-        [int]
+        [long]
         $ListID,
 
         # Affinity person_ids
         [Parameter(Mandatory = $false,
                    Position = 2)]
-        [int[]]
+        [long[]]
         $PersonIDs,
 
         # Affinity organization_ids
         [Parameter(Mandatory = $false,
                    Position = 3)]
-        [int[]]
+        [long[]]
         $OrganizationIDs
     )
 

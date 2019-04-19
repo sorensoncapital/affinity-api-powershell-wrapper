@@ -27,7 +27,7 @@ function Get-AffinityFieldValues
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName ='OrganizationIDandListID')]
-        [Int]
+        [long]
         $OrganizationID,
 
         # Affinity Opportunity ID
@@ -38,7 +38,7 @@ function Get-AffinityFieldValues
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName ='OpportunityIDandListID')]
-        [Int]
+        [long]
         $OpportunityID,
 
         # Affinity List Entry ID
@@ -48,7 +48,7 @@ function Get-AffinityFieldValues
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'ListEntryIDandListID')]
-        [Int]
+        [long]
         $ListEntryID,
 
         [Parameter(Mandatory = $true,
@@ -60,7 +60,7 @@ function Get-AffinityFieldValues
         [Parameter(Mandatory = $true,
                    Position = 1,
                    ParameterSetName = 'ListEntryIDandListID')]
-        [Int]
+        [long]
         $ListID,
 
         [Parameter(Mandatory = $false,

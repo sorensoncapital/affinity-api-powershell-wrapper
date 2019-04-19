@@ -19,7 +19,7 @@ function New-AffinityNote
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'Content',
                    HelpUri = 'https://api-docs.affinity.co/#create-a-new-note')]
-    [OutputType([String])]
+    [OutputType([hashtable])]
     Param
     (
         # Affinity Note Content
@@ -39,25 +39,25 @@ function New-AffinityNote
         # Affinity person_ids
         [Parameter(Mandatory = $false,
                    Position = 1)]
-        [int[]]
+        [long[]]
         $PersonIDs,
 
         # Affinity organization_ids
         [Parameter(Mandatory = $false,
                    Position = 2)]
-        [int[]]
+        [long[]]
         $OrganizationIDs,
 
         # Affinity opportunity_ids
         [Parameter(Mandatory = $false,
                    Position = 3)]
-        [int[]]
+        [long[]]
         $OpportunityIDs,
 
         # Affinity creator_id
         [Parameter(Mandatory = $false,
                    Position = 4)]
-        [int]
+        [long]
         $CreatorID,
 
         # Affinity created_at

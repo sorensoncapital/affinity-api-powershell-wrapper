@@ -19,13 +19,13 @@ function Set-AffinityOpportunity
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#update-an-opportunity')]
-    [OutputType([String])]
+    [OutputType([hashtable])]
     Param
     (
         # Affinity opportunity_id
-        [Parameter(Mandatory = $true, 
+        [Parameter(Mandatory = $true,
                    Position = 0)]
-        [int]
+        [long]
         $OpportunityID,
 
         # Affinity opportunity_name
@@ -37,19 +37,19 @@ function Set-AffinityOpportunity
         # Affinity person_ids
         [Parameter(Mandatory = $false,
                    Position = 2)]
-        [int[]]
+        [long[]]
         $PersonIDs,
 
         # Affinity organization_ids
         [Parameter(Mandatory = $false,
                    Position = 3)]
-        [int[]]
+        [long[]]
         $OrganizationIDs
     )
 
     Process {
         if ($OpportunityName -or $PersonIDs -or $OrganizationIDs) {
-            
+
             $Content = @{ }
             if ($OpportunityName)   { $Content.Add( 'name',             $OpportunityName  ) }
             if ($PersonIDs)         { $Content.Add( 'person_ids',       $PersonIDs        ) }

@@ -18,25 +18,25 @@ function New-AffinityFieldValue
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#create-a-new-field-value')]
-    [OutputType([String])]
+    [OutputType([hashtable])]
     Param
     (
         # Affinity field_id
-        [Parameter(Mandatory = $true, 
+        [Parameter(Mandatory = $true,
                    Position = 0)]
-        [int]
+        [long]
         $FieldID,
 
         # Affinity entity_id
-        [Parameter(Mandatory = $true, 
+        [Parameter(Mandatory = $true,
                    Position = 1)]
-        [int]
+        [long]
         $EntityID,
 
         # Affinity list_entry_id
-        [Parameter(Mandatory = $false, 
+        [Parameter(Mandatory = $false,
                    Position = 2)]
-        [int]
+        [long]
         $ListEntryID,
 
         # Affinity field_value

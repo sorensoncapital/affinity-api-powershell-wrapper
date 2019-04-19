@@ -16,13 +16,13 @@ function Get-AffinityNote
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#get-a-specific-note')]
-    [OutputType([Array])]
+    [OutputType([hashtable])]
     Param
     (
         # Affinity note_id
         [Parameter(Mandatory = $true,
                    Position = 0)]
-        [Int]
+        [long]
         $NoteID
     )
 

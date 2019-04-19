@@ -16,10 +16,10 @@ function Get-AffinityLists
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#get-all-lists')]
-    [OutputType([Array])]
+    [OutputType([array])]
     Param ( )
 
-    Process { 
+    Process {
       $Script:Affinity_Last_Lists = Invoke-AffinityAPIRequest -Method Get -Fragment "lists"
       return $Affinity_Last_Lists
    }

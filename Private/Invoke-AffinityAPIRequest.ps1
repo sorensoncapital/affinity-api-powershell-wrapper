@@ -44,13 +44,13 @@ function Invoke-AffinityAPIRequest
         [Parameter(Mandatory = $true,
                    Position = 3)]
         [ValidateNotNullorEmpty()]
-        [String]
+        [string]
         $Fragment,
 
         # Content
         [Parameter(Mandatory = $false,
                    Position = 4)]
-        [Hashtable]
+        [hashtable]
         $Content
     )
 

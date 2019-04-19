@@ -17,21 +17,21 @@ function Get-AffinityList
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'ListName',
                    HelpUri = 'https://api-docs.affinity.co/#get-a-specific-list')]
-    [OutputType([Array])]
+    [OutputType([hashtable])]
     Param
     (
         # Affinity List Name
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'ListName')]
-        [String]
+        [string]
         $ListName,
 
         # Affinity List ID
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'ListID')]
-        [Int]
+        [long]
         $ListID
     )
 

@@ -16,11 +16,11 @@ function Get-AffinityOrganizationGlobalFieldHeaders
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#get-global-fields36')]
-    [OutputType([Array])]
+    [OutputType([array])]
     Param ( )
 
-    Process { 
-        $Script:Affinity_Last_OrganizationGlobalFieldHeaders = Invoke-AffinityAPIRequest -Method Get -Fragment "organizations/fields" 
+    Process {
+        $Script:Affinity_Last_OrganizationGlobalFieldHeaders = Invoke-AffinityAPIRequest -Method Get -Fragment "organizations/fields"
         return $Affinity_Last_OrganizationGlobalFieldHeaders
     }
 }

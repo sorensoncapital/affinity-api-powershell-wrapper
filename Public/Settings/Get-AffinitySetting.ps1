@@ -31,31 +31,36 @@ function Get-AffinitySetting {
         $BaseUrl
     )
 
-    switch ($PSCmdlet.ParameterSetName) {
-        'Credentials' {
-            switch ($AffinityCacheType) {
-                'ScriptVariable' {
-                    return $AffinityCredentials
-                    break
+    process {
+        switch ($PSCmdlet.ParameterSetName) {
+            'Credentials' {
+                switch ($AffinityCacheType) {
+                    'ScriptVariable' {
+                        if ($AffinityCredentials) { $Output = $AffinityCredentials }
+                        break
+                    }
+                    'EnvironmentVariable' {
+                        if ($env:AFFINITY_CREDENTIALS) { $Output = $env:AFFINITY_CREDENTIALS | ConvertFrom-CliXml }
+                        break
+                    }
                 }
-                'EnvironmentVariable' {
-                    return ( $env:AFFINITY_CREDENTIALS | ConvertFrom-CliXml )
-                    break
+            }
+
+            'BaseUrl' {
+                switch ($AffinityCacheType) {
+                    'ScriptVariable' {
+                        if ($AffinityBaseUrl) { $Output = $AffinityBaseUrl }
+                        break
+                    }
+                    'EnvironmentVariable' {
+                        if ($env:AFFINITY_BASE_URL) { $Output = $env:AFFINITY_BASE_URL | ConvertFrom-CliXml }
+                        break
+                    }
                 }
             }
         }
 
-        'BaseUrl' {
-            switch ($AffinityCacheType) {
-                'ScriptVariable' {
-                    return $AffinityBaseUrl
-                    break
-                }
-                'EnvironmentVariable' {
-                    return ( $env:AFFINITY_BASE_URL | ConvertFrom-CliXml )
-                    break
-                }
-            }
-        }
+        if ($Output) { return $Output }
+        else { return $false }
     }
 }

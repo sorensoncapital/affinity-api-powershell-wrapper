@@ -50,7 +50,7 @@ function Get-AffinityList
                 }
             }
             'EnvironmentVariable' {
-                if ($env:AFFINITY_LAST_LISTS) {
+                if ($env:AFFINITY_LAST_LIST) {
                     $Output = $env:AFFINITY_LAST_LIST | ConvertFrom-CliXml
                     break
                 }

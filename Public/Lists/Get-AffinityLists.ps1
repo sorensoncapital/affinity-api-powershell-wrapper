@@ -39,7 +39,7 @@ function Get-AffinityLists
         else {
             $Output = Invoke-AffinityAPIRequest -Method Get -Fragment "lists"
 
-            switch ($AffinityCacheType) {
+            switch ($AffinityCacheType.Lists) {
                 'ScriptVariable' {
                     $script:Affinity_Last_Lists = $Output
                     break

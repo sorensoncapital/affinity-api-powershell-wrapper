@@ -39,7 +39,7 @@ function Get-AffinityOrganizationGlobalFieldHeaders
         else {
             $Output = Invoke-AffinityAPIRequest -Method Get -Fragment "organizations/fields"
 
-            switch ($AffinityCacheType) {
+            switch ($AffinityCacheType.OrganizationGlobalFieldHeaders) {
                 'ScriptVariable' {
                     $script:Affinity_Last_OrganizationGlobalFieldHeaders = $Output
                     break

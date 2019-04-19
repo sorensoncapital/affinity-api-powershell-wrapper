@@ -42,7 +42,7 @@ function Get-AffinityList
                         Select-Object -First 1 -ExpandProperty 'id'
         }
 
-        switch ($AffinityCacheType) {
+        switch ($AffinityCacheType.List) {
             'ScriptVariable' {
                 if ($Affinity_Last_List) {
                     $Output = $Affinity_Last_List

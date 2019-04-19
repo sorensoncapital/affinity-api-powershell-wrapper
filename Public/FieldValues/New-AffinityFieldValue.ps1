@@ -18,7 +18,7 @@ function New-AffinityFieldValue
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#create-a-new-field-value')]
-    [OutputType([hashtable])]
+    [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity field_id

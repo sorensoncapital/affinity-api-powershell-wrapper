@@ -18,7 +18,7 @@ function Remove-AffinityFieldValue
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#delete-a-field-value')]
-    [OutputType([hashtable])]
+    [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity field_value_id

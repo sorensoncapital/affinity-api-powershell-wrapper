@@ -17,7 +17,7 @@ function Get-AffinityFieldValues
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'OrganizationIDandListID',
                    HelpUri = 'https://api-docs.affinity.co/#get-field-values')]
-    [OutputType([Hashtable])]
+    [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity Organization ID
@@ -107,22 +107,12 @@ function Get-AffinityFieldValues
 
             switch -Wildcard ($PSCmdlet.ParameterSetName) {
                 "OrganizationID*" {
-                    # Check simple cache for organization global field headers
-                    if (!$Affinity_Last_OrganizationGlobalFieldHeaders) {
-                        Get-AffinityOrganizationGlobalFieldHeaders | Out-Null
-                    }
-
                     # Add organization global field headers to field headers to be processed
-                    $FieldHeaders += $Affinity_Last_OrganizationGlobalFieldHeaders
+                    $FieldHeaders += (Get-AffinityOrganizationGlobalFieldHeaders)
                 }
                 "*ListID" {
-                    # Check simple cache for list
-                    if ($Affinity_Last_List.id -ne $ListID) {
-                        Get-AffinityList -ListID $ListID | Out-Null
-                    }
-
                     # Get list field headers
-                    $ListFieldHeaders = $Affinity_Last_List.fields
+                    $ListFieldHeaders = (Get-AffinityList -ListID $ListID).fields
 
                     # Add list id and list name to list field headers
                     for ($i = 0; $i -lt $ListFieldHeaders.count; $i++) {

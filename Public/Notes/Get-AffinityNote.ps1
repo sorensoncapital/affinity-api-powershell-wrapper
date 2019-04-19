@@ -16,7 +16,7 @@ function Get-AffinityNote
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#get-a-specific-note')]
-    [OutputType([hashtable])]
+    [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity note_id

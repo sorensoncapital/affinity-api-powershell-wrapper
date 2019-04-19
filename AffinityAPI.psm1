@@ -23,6 +23,10 @@ Set-Variable -Name AffinityStandardFieldValueTypes -Scope script -Option Constan
     "Ranked Dropdown"
 )
 
+# Select type of cache ('ScriptVariable' or 'EnvironmentVariable')
+# 'EnvironmentVariable' can be useful in certain types of deployments (Azure Functions)
+Set-Variable -Name AffinityCacheType -Scope script -Option Constant -Value 'EnvironmentVariable'
+
 # Export only the functions using PowerShell standard verb-noun naming.
 # Be sure to list each exported functions in the FunctionsToExport field of the module manifest file.
 # This improves performance of command discovery in PowerShell.

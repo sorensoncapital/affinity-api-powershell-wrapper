@@ -17,7 +17,7 @@ function Get-AffinityListEntries
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'ListName',
                    HelpUri = 'https://api-docs.affinity.co/#get-all-list-entries')]
-    [OutputType([array])]
+    [OutputType([System.Management.Automation.PSObject[]])]
     Param
     (
         # Affinity List Name
@@ -37,9 +37,7 @@ function Get-AffinityListEntries
 
     Process {
         if ($ListName) {
-            # Refresh cache if it doesn't match
-            if ($Affinity_Last_List.name -inotlike $ListName) { Get-AffinityList -ListName $ListName | Out-Null }
-            $ListID = $Affinity_Last_List.id
+            $ListID = (Get-AffinityList -ListName $ListName).id
         }
 
         Invoke-AffinityAPIRequest -Method Get -Fragment ("lists/{0}/list-entries" -f $ListID)

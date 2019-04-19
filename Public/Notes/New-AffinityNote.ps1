@@ -19,7 +19,7 @@ function New-AffinityNote
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'Content',
                    HelpUri = 'https://api-docs.affinity.co/#create-a-new-note')]
-    [OutputType([hashtable])]
+    [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity Note Content

@@ -24,7 +24,7 @@ function Invoke-AffinityAPIRequest
                    Position = 0)]
         [ValidateNotNullorEmpty()]
         [pscredential]
-        $Credentials = $AffinityCredentials,
+        $Credentials = (Get-AffinitySetting -Credentials),
 
         # HTTP Method
         [Parameter(Mandatory = $false,
@@ -38,7 +38,7 @@ function Invoke-AffinityAPIRequest
                    Position = 2)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $AffinityBaseUrl = $AffinityStandardBaseUrl,
+        $BaseUrl = (Get-AffinitySetting -BaseUrl),
 
         # Affinity API URL fragment
         [Parameter(Mandatory = $true,
@@ -68,7 +68,7 @@ function Invoke-AffinityAPIRequest
     Process {
         $IRMParameters = @{
             'Method'            = $Method
-            'Uri'               = ("{0}/{1}" -f $AffinityBaseUrl, $Fragment)
+            'Uri'               = ("{0}/{1}" -f $BaseUrl, $Fragment)
             'Credential'        = $Credentials
         }
 

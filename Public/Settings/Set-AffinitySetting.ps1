@@ -24,7 +24,7 @@ function Set-AffinitySetting {
         [pscredential]
         $Credentials = (
             Get-Credential -Title   'Affinity API Key' `
-                           -Message 'Please enter Affinity user name and API key'                      
+                           -Message 'Please enter Affinity user name and API key'
         ),
 
         # Url
@@ -35,19 +35,18 @@ function Set-AffinitySetting {
         $Url = $AffinityStandardBaseUrl
     )
 
-    Set-Variable -Name AffinityCredentials `
-                 -Scope Script `
-                 -Value $Credentials `
-                 -Option ReadOnly `
-                 -Force `
-                 -ErrorAction Stop | Out-Null
-    
-    Set-Variable -Name AffinityBaseUrl `
-                 -Scope Script `
-                 -Value $Url `
-                 -Option ReadOnly `
-                 -Force `
-                 -ErrorAction Stop | Out-Null
-    
-    return $true
+    process {
+        switch ($AffinityCacheType) {
+            'ScriptVariable' {
+                $script:AffinityCredentials = $Credentials
+                $script:AffinityBaseUrl = $Url
+            }
+            'EnvironmentVariable' {
+                $env:AFFINITY_CREDENTIALS = $Credentials | ConvertTo-CliXml
+                $env:AFFINITY_BASE_URL = $Url | ConvertTo-CliXml
+            }
+        }
+
+        return $true
+    }
 }

@@ -18,7 +18,7 @@ function New-AffinityOpportunity
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#create-a-new-opportunity')]
-    [OutputType([hashtable])]
+    [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity opportunity name

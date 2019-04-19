@@ -18,7 +18,7 @@ function Remove-AffinityOpportunity
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#delete-an-opportunity')]
-    [OutputType([hashtable])]
+    [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity opportunity_id

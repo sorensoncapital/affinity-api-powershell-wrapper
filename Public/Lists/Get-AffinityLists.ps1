@@ -16,11 +16,41 @@ function Get-AffinityLists
 {
     [CmdletBinding(PositionalBinding = $true,
                    HelpUri = 'https://api-docs.affinity.co/#get-all-lists')]
-    [OutputType([array])]
+    [OutputType([System.Management.Automation.PSObject[]])]
     Param ( )
 
     Process {
-      $Script:Affinity_Last_Lists = Invoke-AffinityAPIRequest -Method Get -Fragment "lists"
-      return $Affinity_Last_Lists
-   }
+        switch ($AffinityCacheType) {
+            'ScriptVariable' {
+                if ($Affinity_Last_Lists) {
+                    $Output = $Affinity_Last_Lists
+                    break
+                }
+            }
+            'EnvironmentVariable' {
+                if ($env:AFFINITY_LAST_LISTS) {
+                    $Output = $env:AFFINITY_LAST_LISTS | ConvertFrom-CliXml
+                    break
+                }
+            }
+        }
+
+        if ($Output) { return $Output }
+        else {
+            $Output = Invoke-AffinityAPIRequest -Method Get -Fragment "lists"
+
+            switch ($AffinityCacheType) {
+                'ScriptVariable' {
+                    $script:Affinity_Last_Lists = $Output
+                    break
+                }
+                'EnvironmentVariable' {
+                    $env:AFFINITY_LAST_LISTS = $Output | ConvertTo-CliXml
+                    break
+                }
+            }
+
+            return $Output
+        }
+    }
 }

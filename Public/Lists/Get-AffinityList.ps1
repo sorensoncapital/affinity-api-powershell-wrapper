@@ -17,7 +17,7 @@ function Get-AffinityList
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'ListName',
                    HelpUri = 'https://api-docs.affinity.co/#get-a-specific-list')]
-    [OutputType([hashtable])]
+    [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity List Name
@@ -37,16 +37,45 @@ function Get-AffinityList
 
     Process {
         if ($ListName) {
-            # Refresh simple cache
-            if (!$Script:Affinity_Last_Lists) { Get-AffinityLists | Out-Null }
-
-            $ListID = $Affinity_Last_Lists | Where-Object { $_.name -like $ListName } | Select-Object -First 1 -ExpandProperty 'id'
+            $ListID = Get-AffinityLists |
+                        Where-Object { $_.name -like $ListName } |
+                        Select-Object -First 1 -ExpandProperty 'id'
         }
 
-        # Do a separate API call (instead of filtering the List collection) in order to get the .fields[] subarray
-        # This way all output is congruent
-        $Script:Affinity_Last_List = Invoke-AffinityAPIRequest -Method Get -Fragment ("lists/{0}" -f $ListID)
+        switch ($AffinityCacheType) {
+            'ScriptVariable' {
+                if ($Affinity_Last_List) {
+                    $Output = $Affinity_Last_List
+                    break
+                }
+            }
+            'EnvironmentVariable' {
+                if ($env:AFFINITY_LAST_LISTS) {
+                    $Output = $env:AFFINITY_LAST_LIST | ConvertFrom-CliXml
+                    break
+                }
+            }
+        }
 
-        return $Affinity_Last_Lists
+        if ($Output.id -eq $ListID) { return $Output }
+        else {
+            # Do a separate API call (instead of filtering the List collection) in order to get the .fields[]
+            # subarray so all output is congruent
+
+            $Output = Invoke-AffinityAPIRequest -Method Get -Fragment ("lists/{0}" -f $ListID)
+
+            switch ($AffinityCacheType) {
+                'ScriptVariable' {
+                    $script:Affinity_Last_List = $Output
+                    break
+                }
+                'EnvironmentVariable' {
+                    $env:AFFINITY_LAST_LIST = $Output | ConvertTo-CliXml
+                    break
+                }
+            }
+
+            return $Output
+        }
     }
 }

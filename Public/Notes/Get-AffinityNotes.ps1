@@ -17,7 +17,7 @@ function Get-AffinityNotes
     [CmdletBinding(PositionalBinding = $true,
                    DefaultParameterSetName = 'AllNotes',
                    HelpUri = 'https://api-docs.affinity.co/#get-all-notes')]
-    [OutputType([array])]
+    [OutputType([System.Management.Automation.PSObject[]])]
     Param
     (
         # Affinity person_id

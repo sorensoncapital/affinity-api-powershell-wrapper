@@ -45,7 +45,7 @@ function Get-AffinityOrganizationGlobalFieldHeaders
                     break
                 }
                 'EnvironmentVariable' {
-                    $env:AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS = $Output | ConvertTo-CliXml
+                    [System.Environment]::SetEnvironmentVariable('AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS', ($Output | ConvertTo-CliXml))
                     break
                 }
             }

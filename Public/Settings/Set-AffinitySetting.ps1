@@ -42,8 +42,8 @@ function Set-AffinitySetting {
                 $script:AffinityBaseUrl = $Url
             }
             'EnvironmentVariable' {
-                $env:AFFINITY_CREDENTIALS = $Credentials | ConvertTo-CliXml
-                $env:AFFINITY_BASE_URL = $Url | ConvertTo-CliXml
+                [System.Environment]::SetEnvironmentVariable('AFFINITY_CREDENTIALS', ($Credentials | ConvertTo-CliXml))
+                [System.Environment]::SetEnvironmentVariable('AFFINITY_BASE_URL', ($Url | ConvertTo-CliXml))
             }
         }
 

@@ -70,7 +70,7 @@ function Get-AffinityList
                     break
                 }
                 'EnvironmentVariable' {
-                    $env:AFFINITY_LAST_LIST = $Output | ConvertTo-CliXml
+                    [System.Environment]::SetEnvironmentVariable('AFFINITY_LAST_LIST', ($Output | ConvertTo-CliXml))
                     break
                 }
             }

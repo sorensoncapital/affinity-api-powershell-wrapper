@@ -9,10 +9,10 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = '.\AffinityAPI.psm1'
+RootModule = 'AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.16'
+ModuleVersion = '0.0.17'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -70,49 +70,30 @@ PowerShellVersion = '5.1'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    Get-AffinityFieldValues
-    New-AffinityFieldValue
-    Remove-AffinityFieldValue
-    Set-AffinityFieldValue
-    Get-AffinityListEntries
-    Get-AffinityList
-    Get-AffinityLists
-    Get-AffinityNote
-    Get-AffinityNotes
-    New-AffinityNote
-    Find-AffinityOpportunity
-    Get-AffinityOpportunity
-    New-AffinityOpportunity
-    Remove-AffinityOpportunity
-    Set-AffinityOpportunity
-    Get-AffinityOrganizationGlobalFieldHeaders
-    Export-AffinitySetting
-    Import-AffinitySetting
-    Set-AffinitySetting
+    'Get-AffinityFieldValues'
+    'New-AffinityFieldValue'
+    'Remove-AffinityFieldValue'
+    'Set-AffinityFieldValue'
+    'Get-AffinityListEntries'
+    'Get-AffinityList'
+    'Get-AffinityLists'
+    'Get-AffinityNote'
+    'Get-AffinityNotes'
+    'New-AffinityNote'
+    'Find-AffinityOpportunity'
+    'Get-AffinityOpportunity'
+    'New-AffinityOpportunity'
+    'Remove-AffinityOpportunity'
+    'Set-AffinityOpportunity'
+    'Get-AffinityOrganizationGlobalFieldHeaders'
+    'Export-AffinitySetting'
+    'Get-AffinitySetting'
+    'Import-AffinitySetting'
+    'Set-AffinitySetting'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = @(
-    Get-AffinityFieldValues
-    New-AffinityFieldValue
-    Remove-AffinityFieldValue
-    Set-AffinityFieldValue
-    Get-AffinityListEntries
-    Get-AffinityList
-    Get-AffinityLists
-    Get-AffinityNote
-    Get-AffinityNotes
-    New-AffinityNote
-    Find-AffinityOpportunity
-    Get-AffinityOpportunity
-    New-AffinityOpportunity
-    Remove-AffinityOpportunity
-    Set-AffinityOpportunity
-    Get-AffinityOrganizationGlobalFieldHeaders
-    Export-AffinitySetting
-    Import-AffinitySetting
-    Set-AffinitySetting
-)
+CmdletsToExport = @()
 
 # Variables to export from this module
 VariablesToExport = @()

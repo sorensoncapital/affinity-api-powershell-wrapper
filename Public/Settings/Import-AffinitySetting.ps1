@@ -45,21 +45,21 @@ function Import-AffinitySetting {
 
     process {
         switch ($PSCmdlet.ParameterSetName) {
-            'AutoName' { 
+            'AutoName' {
                 $ImportPath = Join-Path -Path $SettingDir `
                                         -ChildPath (Get-AffinitySettingName -SettingUserName $SettingUserName)
             }
-            'ManualName' { 
+            'ManualName' {
                 $ImportPath = $SettingPath
             }
             Default { <# Throw error #> }
         }
 
-        if (Test-Path $ImportPath) { 
+        if (Test-Path $ImportPath) {
             $ImportedSetting = Import-Clixml -LiteralPath $ImportPath
-            
+
             if ($ImportedSetting.Module -ilike $MyInvocation.MyCommand.ModuleName) {
-                Set-AffinitySetting -Credentials $ImportedSetting.Credentials -Url $ImportedSetting.Url
+                Set-AffinitySetting -Credentials $ImportedSetting.Credentials -BaseUrl $ImportedSetting.Url
             }
             else { throw [System.NotSupportedException] ("Setting for different module {0}" -f $ImportedSetting.Module) }
         }

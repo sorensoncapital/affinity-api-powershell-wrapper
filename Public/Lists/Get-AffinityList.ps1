@@ -36,12 +36,14 @@ function Get-AffinityList
     )
 
     Process {
+        # Get List ID if List Name is provided
         if ($ListName) {
             $ListID = Get-AffinityLists |
                         Where-Object { $_.name -like $ListName } |
                         Select-Object -First 1 -ExpandProperty 'id'
         }
 
+        # Check simple cache for the last list
         switch ($AffinityCacheType.List) {
             'ScriptVariable' {
                 if ($Affinity_Last_List) {
@@ -51,31 +53,40 @@ function Get-AffinityList
             }
             'EnvironmentVariable' {
                 if ($env:AFFINITY_LAST_LIST) {
-                    $Output = $env:AFFINITY_LAST_LIST | ConvertFrom-CliXml
+                    $EnvInput = $env:AFFINITY_LAST_LIST | ConvertFrom-CliXml
+
+                    if (($EnvInput | Measure-Object).Count -gt 0) { $Output = $EnvInput }
+
                     break
                 }
             }
         }
 
-        if ($Output.id -eq $ListID) { return $Output }
-        else {
+        # Call API if last list is not available in the cache
+        if (!$Output -or $Output.id -ne $ListID) {
             # Do a separate API call (instead of filtering the List collection) in order to get the .fields[]
             # subarray so all output is congruent
 
             $Output = Invoke-AffinityAPIRequest -Method Get -Fragment ("lists/{0}" -f $ListID)
 
-            switch ($AffinityCacheType) {
+            # Set cache
+            switch ($AffinityCacheType.List) {
                 'ScriptVariable' {
                     $script:Affinity_Last_List = $Output
                     break
                 }
                 'EnvironmentVariable' {
-                    [System.Environment]::SetEnvironmentVariable('AFFINITY_LAST_LIST', ($Output | ConvertTo-CliXml))
+                    $EnvOutput = $Output | ConvertTo-CliXml
+
+                    if ($EnvOutput.length -le 32767) {
+                        $env:AFFINITY_LAST_LIST = $EnvOutput
+                    }
+
                     break
                 }
             }
-
-            return $Output
         }
+
+        return $Output
     }
 }

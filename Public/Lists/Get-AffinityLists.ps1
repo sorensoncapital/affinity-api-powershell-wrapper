@@ -20,7 +20,8 @@ function Get-AffinityLists
     Param ( )
 
     Process {
-        switch ($AffinityCacheType) {
+        # Check simple cache for lists
+        switch ($AffinityCacheType.Lists) {
             'ScriptVariable' {
                 if ($Affinity_Last_Lists) {
                     $Output = $Affinity_Last_Lists
@@ -29,28 +30,37 @@ function Get-AffinityLists
             }
             'EnvironmentVariable' {
                 if ($env:AFFINITY_LAST_LISTS) {
-                    $Output = $env:AFFINITY_LAST_LISTS | ConvertFrom-CliXml
+                    $EnvInput = $env:AFFINITY_LAST_LISTS | ConvertFrom-CliXml
+
+                    if (($EnvInput | Measure-Object).Count -gt 0) { $Output = $EnvInput }
+
                     break
                 }
             }
         }
 
-        if ($Output) { return $Output }
-        else {
+        # Call API if lists are not available in simple cache
+        if (!$Output) {
             $Output = Invoke-AffinityAPIRequest -Method Get -Fragment "lists"
 
+            # Set cache
             switch ($AffinityCacheType.Lists) {
                 'ScriptVariable' {
                     $script:Affinity_Last_Lists = $Output
                     break
                 }
                 'EnvironmentVariable' {
-                    [System.Environment]::SetEnvironmentVariable('AFFINITY_LAST_LISTS', ($Output | ConvertTo-CliXml))
+                    $EnvOutput = $Output | ConvertTo-CliXml
+
+                    if ($EnvOutput.length -le 32767) {
+                        $env:AFFINITY_LAST_LISTS = $EnvOutput
+                    }
+
                     break
                 }
             }
-
-            return $Output
         }
+
+        return $Output
     }
 }

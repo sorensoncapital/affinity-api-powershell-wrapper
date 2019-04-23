@@ -20,7 +20,7 @@ function Get-AffinityOrganizationGlobalFieldHeaders
     Param ( )
 
     Process {
-        switch ($AffinityCacheType) {
+        switch ($AffinityCacheType.OrganizationGlobalFieldHeaders) {
             'ScriptVariable' {
                 if ($Affinity_Last_OrganizationGlobalFieldHeaders) {
                     $Output = $Affinity_Last_OrganizationGlobalFieldHeaders
@@ -29,14 +29,16 @@ function Get-AffinityOrganizationGlobalFieldHeaders
             }
             'EnvironmentVariable' {
                 if ($env:AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS) {
-                    $Output = $env:AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS | ConvertFrom-CliXml
+                    $EnvInput = $env:AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS | ConvertFrom-CliXml
+
+                    if (($EnvInput | Measure-Object).Count -gt 0) { $Output = $EnvInput }
+
                     break
                 }
             }
         }
 
-        if ($Output) { return $Output }
-        else {
+        if (!$Output) {
             $Output = Invoke-AffinityAPIRequest -Method Get -Fragment "organizations/fields"
 
             switch ($AffinityCacheType.OrganizationGlobalFieldHeaders) {
@@ -45,12 +47,17 @@ function Get-AffinityOrganizationGlobalFieldHeaders
                     break
                 }
                 'EnvironmentVariable' {
-                    [System.Environment]::SetEnvironmentVariable('AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS', ($Output | ConvertTo-CliXml))
+                    $EnvOutput = $Output | ConvertTo-CliXml
+
+                    if ($EnvOutput.length -le 32767) {
+                        $env:AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS = $EnvOutput
+                    }
+
                     break
                 }
             }
-
-            return $Output
         }
+
+        return $Output
     }
 }

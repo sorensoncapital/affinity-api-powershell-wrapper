@@ -27,23 +27,23 @@ function Set-AffinitySetting {
                            -Message 'Please enter Affinity user name and API key'
         ),
 
-        # Url
+        # BaseUrl
         [Parameter(Mandatory = $false,
                    Position = 1)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $Url = $AffinityStandardBaseUrl
+        $BaseUrl = $AffinityStandardBaseUrl
     )
 
     process {
         switch ($AffinityCacheType.Setting) {
             'ScriptVariable' {
                 $script:AffinityCredentials = $Credentials
-                $script:AffinityBaseUrl = $Url
+                $script:AffinityBaseUrl = $BaseUrl
             }
             'EnvironmentVariable' {
-                [System.Environment]::SetEnvironmentVariable('AFFINITY_CREDENTIALS', ($Credentials | ConvertTo-CliXml))
-                [System.Environment]::SetEnvironmentVariable('AFFINITY_BASE_URL', ($Url | ConvertTo-CliXml))
+                $env:AFFINITY_CREDENTIALS = ( $Credentials | ConvertTo-CliXml )
+                $env:AFFINITY_BASE_URL = $BaseUrl
             }
         }
 

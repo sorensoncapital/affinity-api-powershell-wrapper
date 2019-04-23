@@ -9,10 +9,10 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'AffinityAPI.psm1'
+RootModule = '.\AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.15'
+ModuleVersion = '0.0.16'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')

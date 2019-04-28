@@ -1,30 +1,35 @@
 <#
 .Synopsis
-   Updates an existing opportunity with opportunity_id with the supplied parameters
+    Updates an existing opportunity with opportunity_id with the supplied parameters
 .DESCRIPTION
-   Long description
+    Long description
 .EXAMPLE
-   Example of how to use this cmdlet
+    Example of how to use this cmdlet
 .EXAMPLE
-   Another example of how to use this cmdlet
+    Another example of how to use this cmdlet
 .INPUTS
-   Inputs to this cmdlet (if any)
+    Inputs to this cmdlet (if any)
 .OUTPUTS
-   Output from this cmdlet (if any)
+    Output from this cmdlet (if any)
 .NOTES
-   If you are trying to add a person to an opportunity, the existing values for person_ids must also be passed into the endpoint.
-   If you are trying to add an organization to an opportunity, the existing values for organization_ids must also be passed into the endpoint.
+    If you are trying to add a person to an opportunity, the existing values for person_ids must also be passed
+    into the endpoint.
+
+    If you are trying to add an organization to an opportunity, the existing values for organization_ids must also
+    be passed into the endpoint.
+.LINK
+    https://api-docs.affinity.co/#update-an-opportunity
 #>
 function Set-AffinityOpportunity
 {
-    [CmdletBinding(PositionalBinding = $true,
-                   HelpUri = 'https://api-docs.affinity.co/#update-an-opportunity')]
+    [CmdletBinding(PositionalBinding = $true)]
     [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity opportunity_id
         [Parameter(Mandatory = $true,
                    Position = 0)]
+        [ValidateNotNullOrEmpty()]
         [long]
         $OpportunityID,
 

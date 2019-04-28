@@ -1,24 +1,25 @@
 <#
 .Synopsis
-   Creates a new note
+    Creates a new note
 .DESCRIPTION
-   Long description
+    Long description
 .EXAMPLE
-   Example of how to use this cmdlet
+    Example of how to use this cmdlet
 .EXAMPLE
-   Another example of how to use this cmdlet
+    Another example of how to use this cmdlet
 .INPUTS
-   Inputs to this cmdlet (if any)
+    Inputs to this cmdlet (if any)
 .OUTPUTS
-   Output from this cmdlet (if any)
+    Output from this cmdlet (if any)
 .NOTES
-   General notes
+    General notes
+.LINK
+    https://api-docs.affinity.co/#create-a-new-note
 #>
 function New-AffinityNote
 {
     [CmdletBinding(PositionalBinding = $true,
-                   DefaultParameterSetName = 'Content',
-                   HelpUri = 'https://api-docs.affinity.co/#create-a-new-note')]
+                   DefaultParameterSetName = 'Content')]
     [OutputType([System.Management.Automation.PSObject])]
     Param
     (
@@ -26,6 +27,7 @@ function New-AffinityNote
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'Content')]
+        [ValidateNotNullOrEmpty()]
         [string]
         $NoteContent,
 
@@ -33,6 +35,7 @@ function New-AffinityNote
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'GmailID')]
+        [ValidateNotNullOrEmpty()]
         [string]
         $GmailID,
 

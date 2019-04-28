@@ -12,7 +12,7 @@
 RootModule = 'AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.17'
+ModuleVersion = '0.0.18'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -70,22 +70,20 @@ PowerShellVersion = '5.1'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    'Get-AffinityFieldValues'
+    'Get-AffinityFieldValue'
     'New-AffinityFieldValue'
     'Remove-AffinityFieldValue'
     'Set-AffinityFieldValue'
-    'Get-AffinityListEntries'
+    'Get-AffinityListEntry'
     'Get-AffinityList'
-    'Get-AffinityLists'
     'Get-AffinityNote'
-    'Get-AffinityNotes'
     'New-AffinityNote'
     'Find-AffinityOpportunity'
     'Get-AffinityOpportunity'
     'New-AffinityOpportunity'
     'Remove-AffinityOpportunity'
     'Set-AffinityOpportunity'
-    'Get-AffinityOrganizationGlobalFieldHeaders'
+    'Get-AffinityOrganizationGlobalFieldHeader'
     'Export-AffinitySetting'
     'Get-AffinitySetting'
     'Import-AffinitySetting'

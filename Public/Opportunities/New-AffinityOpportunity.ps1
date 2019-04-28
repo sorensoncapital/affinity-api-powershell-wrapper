@@ -1,35 +1,38 @@
 <#
 .Synopsis
-   Create a new Affinity opportunity
+    Create a new Affinity opportunity
 .DESCRIPTION
-   Long description
+    Long description
 .EXAMPLE
-   Example of how to use this cmdlet
+    Example of how to use this cmdlet
 .EXAMPLE
-   Another example of how to use this cmdlet
+    Another example of how to use this cmdlet
 .INPUTS
-   Inputs to this cmdlet (if any)
+    Inputs to this cmdlet (if any)
 .OUTPUTS
-   Output from this cmdlet (if any)
+    Output from this cmdlet (if any)
 .NOTES
-   General notes
+    General notes
+.LINK
+    https://api-docs.affinity.co/#create-a-new-opportunity
 #>
 function New-AffinityOpportunity
 {
-    [CmdletBinding(PositionalBinding = $true,
-                   HelpUri = 'https://api-docs.affinity.co/#create-a-new-opportunity')]
+    [CmdletBinding(PositionalBinding = $true)]
     [OutputType([System.Management.Automation.PSObject])]
     Param
     (
         # Affinity opportunity name
         [Parameter(Mandatory = $true,
                    Position = 0)]
+        [ValidateNotNullOrEmpty()]
         [string]
         $OpportunityName,
 
         # Affinity list_id
         [Parameter(Mandatory = $true,
                    Position = 1)]
+        [ValidateNotNullOrEmpty()]
         [long]
         $ListID,
 

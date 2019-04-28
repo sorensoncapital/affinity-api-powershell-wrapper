@@ -1,16 +1,16 @@
 <#
 .Synopsis
-   Short description
+    Short description
 .DESCRIPTION
-   Long description
+    Long description
 .EXAMPLE
-   Example of how to use this cmdlet
+    Example of how to use this cmdlet
 .INPUTS
-   Inputs to this cmdlet (if any)
+    Inputs to this cmdlet (if any)
 .OUTPUTS
-   Output from this cmdlet (if any)
+    Output from this cmdlet (if any)
 .NOTES
-   Notes
+    Notes
 #>
 
 function Import-AffinitySetting {
@@ -61,7 +61,9 @@ function Import-AffinitySetting {
             if ($ImportedSetting.Module -ilike $MyInvocation.MyCommand.ModuleName) {
                 Set-AffinitySetting -Credentials $ImportedSetting.Credentials -BaseUrl $ImportedSetting.Url
             }
-            else { throw [System.NotSupportedException] ("Setting for different module {0}" -f $ImportedSetting.Module) }
+            else {
+                throw [System.NotSupportedException] ("Setting for different module {0}" -f $ImportedSetting.Module)
+            }
         }
         else { throw [System.IO.FileNotFoundException] "Setting failed to be imported" }
     }

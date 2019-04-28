@@ -1,21 +1,22 @@
 <#
 .Synopsis
-   Short description
+    Short description
 .DESCRIPTION
-   Long description
+    Long description
 .EXAMPLE
-   Example of how to use this cmdlet
+    Example of how to use this cmdlet
 .INPUTS
-   Inputs to this cmdlet (if any)
+    Inputs to this cmdlet (if any)
 .OUTPUTS
-   Output from this cmdlet (if any)
+    Output from this cmdlet (if any)
 .NOTES
-   General notes
+    General notes
+.LINK
+    https://api-docs.affinity.co/#get-global-fields36
 #>
-function Get-AffinityOrganizationGlobalFieldHeaders
+function Get-AffinityOrganizationGlobalFieldHeader
 {
-    [CmdletBinding(PositionalBinding = $true,
-                   HelpUri = 'https://api-docs.affinity.co/#get-global-fields36')]
+    [CmdletBinding(PositionalBinding = $true)]
     [OutputType([System.Management.Automation.PSObject[]])]
     Param ( )
 

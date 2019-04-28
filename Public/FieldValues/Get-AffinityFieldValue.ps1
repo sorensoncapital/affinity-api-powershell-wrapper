@@ -1,22 +1,23 @@
 <#
 .Synopsis
-   Short description
+    Short description
 .DESCRIPTION
-   Long description
+    Long description
 .EXAMPLE
-   Example of how to use this cmdlet
+    Example of how to use this cmdlet
 .INPUTS
-   Inputs to this cmdlet (if any)
+    Inputs to this cmdlet (if any)
 .OUTPUTS
-   Output from this cmdlet (if any)
+    Output from this cmdlet (if any)
 .NOTES
-   Need to implement organization name search, person_id (and person_name), opportunity_id (and opportunity_name), list_entry_id (and list_entry_name?)
+    Need to implement person_id, opportunity_id, list_entry_id
+.LINK
+    https://api-docs.affinity.co/#get-field-values
 #>
-function Get-AffinityFieldValues
+function Get-AffinityFieldValue
 {
     [CmdletBinding(PositionalBinding = $true,
-                   DefaultParameterSetName = 'OrganizationIDandListID',
-                   HelpUri = 'https://api-docs.affinity.co/#get-field-values')]
+                   DefaultParameterSetName = 'OrganizationIDandListID')]
     [OutputType([System.Management.Automation.PSObject])]
     Param
     (
@@ -27,6 +28,7 @@ function Get-AffinityFieldValues
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName ='OrganizationIDandListID')]
+        [ValidateNotNullOrEmpty()]
         [long]
         $OrganizationID,
 
@@ -34,10 +36,10 @@ function Get-AffinityFieldValues
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName ='OpportunityID')]
-                # Affinity Opportunity ID
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName ='OpportunityIDandListID')]
+        [ValidateNotNullOrEmpty()]
         [long]
         $OpportunityID,
 
@@ -48,9 +50,11 @@ function Get-AffinityFieldValues
         [Parameter(Mandatory = $true,
                    Position = 0,
                    ParameterSetName = 'ListEntryIDandListID')]
+        [ValidateNotNullOrEmpty()]
         [long]
         $ListEntryID,
 
+        # Affinity List ID
         [Parameter(Mandatory = $true,
                    Position = 1,
                    ParameterSetName = 'OrganizationIDandListID')]
@@ -60,9 +64,11 @@ function Get-AffinityFieldValues
         [Parameter(Mandatory = $true,
                    Position = 1,
                    ParameterSetName = 'ListEntryIDandListID')]
+        [ValidateNotNullOrEmpty()]
         [long]
         $ListID,
 
+        # Expand ouput with field headers
         [Parameter(Mandatory = $false,
                    Position = 2,
                    ParameterSetName = 'OrganizationIDandListID')]
@@ -108,7 +114,7 @@ function Get-AffinityFieldValues
             switch -Wildcard ($PSCmdlet.ParameterSetName) {
                 "OrganizationID*" {
                     # Add organization global field headers to field headers to be processed
-                    $FieldHeaders += (Get-AffinityOrganizationGlobalFieldHeaders)
+                    $FieldHeaders += (Get-AffinityOrganizationGlobalFieldHeader)
                 }
                 "*ListID" {
                     # Get list field headers

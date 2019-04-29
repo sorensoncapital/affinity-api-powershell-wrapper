@@ -1,16 +1,16 @@
 <#
 .Synopsis
-   Short description
+    Short description
 .DESCRIPTION
-   Long description
+    Long description
 .EXAMPLE
-   Example of how to use this cmdlet
+    Example of how to use this cmdlet
 .INPUTS
-   Inputs to this cmdlet (if any)
+    Inputs to this cmdlet (if any)
 .OUTPUTS
-   Output from this cmdlet (if any)
+    Output from this cmdlet (if any)
 .NOTES
-   General notes
+    General notes
 #>
 
 function Get-AffinitySettingName {
@@ -22,11 +22,11 @@ function Get-AffinitySettingName {
         [string]
         $SettingUserName
     )
-    
-    process { 
+
+    process {
        ( $MyInvocation.MyCommand.ModuleName + "_" + `
        $env:COMPUTERNAME + "_" + `
        $env:USERNAME + "_" + `
-       $SettingUserName + ".cred" ) 
+       $SettingUserName + ".cred" )
    }
 }

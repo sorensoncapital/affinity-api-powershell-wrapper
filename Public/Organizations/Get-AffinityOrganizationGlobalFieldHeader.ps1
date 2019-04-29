@@ -23,14 +23,14 @@ function Get-AffinityOrganizationGlobalFieldHeader
     Process {
         switch ($AffinityCacheType.OrganizationGlobalFieldHeaders) {
             'ScriptVariable' {
-                if ($Affinity_Last_OrganizationGlobalFieldHeaders) {
-                    $Output = $Affinity_Last_OrganizationGlobalFieldHeaders
+                if ($AffinityLastOrganizationGlobalFieldHeaders) {
+                    $Output = $AffinityLastOrganizationGlobalFieldHeaders
                     break
                 }
             }
             'EnvironmentVariable' {
-                if ($env:AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS) {
-                    $EnvInput = $env:AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS | ConvertFrom-CliXml
+                if ($env:AFFINITY_LAST_ORGANIZATION_GLOBAL_FIELD_HEADERS) {
+                    $EnvInput = $env:AFFINITY_LAST_ORGANIZATION_GLOBAL_FIELD_HEADERS | ConvertFrom-CliXml
 
                     if (($EnvInput | Measure-Object).Count -gt 0) { $Output = $EnvInput }
 
@@ -44,14 +44,14 @@ function Get-AffinityOrganizationGlobalFieldHeader
 
             switch ($AffinityCacheType.OrganizationGlobalFieldHeaders) {
                 'ScriptVariable' {
-                    $script:Affinity_Last_OrganizationGlobalFieldHeaders = $Output
+                    $script:AffinityLastOrganizationGlobalFieldHeaders = $Output
                     break
                 }
                 'EnvironmentVariable' {
                     $EnvOutput = $Output | ConvertTo-CliXml
 
                     if ($EnvOutput.length -le 32767) {
-                        $env:AFFINITY_LAST_ORGANIZATIONGLOBALFIELDHEADERS = $EnvOutput
+                        $env:AFFINITY_LAST_ORGANIZATION_GLOBAL_FIELD_HEADERS = $EnvOutput
                     }
 
                     break

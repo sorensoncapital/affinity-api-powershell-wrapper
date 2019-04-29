@@ -132,7 +132,7 @@ function Get-AffinityFieldValue
             }
 
             # Instantiate output hashtable
-            $FieldValuesOutput = @{}
+            $ExpandedFieldValues = @{}
 
             # Really need to refactor this code ...
             # Investigate using Join-Object (https://www.powershellgallery.com/packages/Join/2.3.1) then Group-Object
@@ -177,14 +177,14 @@ function Get-AffinityFieldValue
                         $singlefieldvalue = $null
                     }
 
-                    $FieldValuesOutput.Add($fieldheader.name, $fieldvalue)
+                    $ExpandedFieldValues.Add($fieldheader.name, $fieldvalue)
                     $fieldvalue = @{}
                 }
 
                 $FieldHeaders = $FieldValues = $null
             }
 
-            return $FieldValuesOutput
+            return $ExpandedFieldValues
         }
         else { return $FieldValues }
     }

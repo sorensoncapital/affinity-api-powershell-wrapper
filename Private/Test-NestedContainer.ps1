@@ -1,16 +1,16 @@
 <#
 .Synopsis
-   Short description
+    Short description
 .DESCRIPTION
-   Long description
+    Long description
 .EXAMPLE
-   Example of how to use this cmdlet
+    Example of how to use this cmdlet
 .INPUTS
-   Inputs to this cmdlet (if any)
+    Inputs to this cmdlet (if any)
 .OUTPUTS
-   Output from this cmdlet (if any)
+    Output from this cmdlet (if any)
 .NOTES
-   General notes
+    General notes
 #>
 
 function Test-NestedContainer {
@@ -20,15 +20,16 @@ function Test-NestedContainer {
         # Collection
         [Parameter(Mandatory = $true,
                    Position = 0)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]
         $Collection
     )
 
     process {
-        $Collection.Values.ForEach{
-            if( $_ -is [System.Collections.ICollection] ) { $Test = $true }
+        foreach ($value in $Collection.Values) {
+            if ($item -is [System.Collections.ICollection]) { return $true }
         }
 
-        return $Test
+        $false
     }
 }

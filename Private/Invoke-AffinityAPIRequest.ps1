@@ -1,21 +1,22 @@
 <#
 .Synopsis
-   Short description
+    Short description
 .DESCRIPTION
-   Long description
+    Long description
 .EXAMPLE
-   Example of how to use this cmdlet
+    Example of how to use this cmdlet
 .INPUTS
-   Inputs to this cmdlet (if any)
+    Inputs to this cmdlet (if any)
 .OUTPUTS
-   Output from this cmdlet (if any)
+    Output from this cmdlet (if any)
 .NOTES
-   General notes
+    General notes
+.LINK
+    https://api-docs.affinity.co
 #>
 function Invoke-AffinityAPIRequest
 {
-    [CmdletBinding(PositionalBinding = $true,
-                   HelpUri = 'https://api-docs.affinity.co')]
+    [CmdletBinding(PositionalBinding = $true)]
     [OutputType([System.Management.Automation.PSObject])]
     Param
     (
@@ -68,20 +69,20 @@ function Invoke-AffinityAPIRequest
     Process {
         $IRMParameters = @{
             'Method'            = $Method
-            'Uri'               = ("{0}/{1}" -f $BaseUrl, $Fragment)
+            'Uri'               = ( "{0}/{1}" -f $BaseUrl, $Fragment )
             'Credential'        = $Credentials
         }
 
-        if ($PSVersionTable.PSVersion.Major -ge 6 ) { $IRMParameters.Add( 'Authentication', 'Basic' ) }
+        if ($PSVersionTable.PSVersion.Major -ge 6 ) { $IRMParameters.Add('Authentication', 'Basic') }
 
         # Handle content
         if ($Content) {
             if (Test-NestedContainer $Content) {
-                $IRMParameters.Add('Body'       ,   ($Content | ConvertTo-Json -Compress -Depth 10) )
-                $IRMParameters.Add('ContentType',   'application/json'                              )
+                $IRMParameters.Add('Body', ( $Content | ConvertTo-Json -Compress -Depth 10 ))
+                $IRMParameters.Add('ContentType', 'application/json')
             }
             else {
-                $IRMParameters.Add('Body'       ,   $Content                    )
+                $IRMParameters.Add('Body', $Content)
             }
         }
 

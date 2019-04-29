@@ -27,7 +27,7 @@ function Test-NestedContainer {
 
     process {
         foreach ($value in $Collection.Values) {
-            if ($item -is [System.Collections.ICollection]) { return $true }
+            if ($value -is [System.Collections.ICollection]) { return $true }
         }
 
         $false

@@ -62,18 +62,17 @@ foreach ($entry in $ListEntries) {
 
 To conform to PowerShell naming conventions and best practices, here's the reference for all of the functions developed to-date:
 
-Affinity             | Create                  | Read                    | Update                  | Delete                     | Search  |
-Resource             | "New-"                  | "Get-"                  | "Set-"                  | "Remove-"                  | "Find-" |
- ------------------- |:-----------------------:|:-----------------------:|:-----------------------:|:--------------------------:|:-------:|
-EntityFiles          | *TBD*                   | *TBD*                   | *NA*                    | *NA*                       | *NA*    |
-FieldValues          | New-AffinityFieldValue  | Get-AffinityFieldValue  | Set-AffinityFieldValue  | Remove-AffinityFieldValue  | *NA*    |
-ListEntries          | *TBD*                   | Get-AffinityListEntry   | *NA*                    | *TBD*                      | *NA*    |
-Lists                | *NA*                    | Get-AffinityList        | *NA*                    | *NA*                       | *NA*    |
-Notes                | New-AffinityNote        | Get-AffinityNote        | *NA*                    | *NA*                       | *NA*    |
-Opportunities        | New-AffinityOpportunity | Get-AffinityOpportunity | Set-AffinityOpportunity | Remove-AffinityOpportunity | *TBD*   |
-Organizations        | *TBD*                   | *TBD*                   | *TBD*                   | *TBD*                      | *TBD*   |
-Persons              | *TBD*                   | *TBD*                   | *TBD*                   | *TBD*                      | *TBD*   |
-RelationshipStrength | *NA*                    | *TBD*                   | *NA*                    | *NA*                       | *NA*    |
+| Affinity Resource    | Create / "New-"         | Read / "Get-"           | Update / "Set-"         | Delete / "Remove-"         | Search / "Find-" |
+| -------------------- |:-----------------------:|:-----------------------:|:-----------------------:|:--------------------------:|:----------------:|
+| EntityFiles          | *TBD*                   | *TBD*                   | *NA*                    | *NA*                       | *NA*             |
+| FieldValues          | New-AffinityFieldValue  | Get-AffinityFieldValue  | Set-AffinityFieldValue  | Remove-AffinityFieldValue  | *NA*             |
+| ListEntries          | *TBD*                   | Get-AffinityListEntry   | *NA*                    | *TBD*                      | *NA*             |
+| Lists                | *NA*                    | Get-AffinityList        | *NA*                    | *NA*                       | *NA*             |
+| Notes                | New-AffinityNote        | Get-AffinityNote        | *NA*                    | *NA*                       | *NA*             |
+| Opportunities        | New-AffinityOpportunity | Get-AffinityOpportunity | Set-AffinityOpportunity | Remove-AffinityOpportunity | *TBD*            |
+| Organizations        | *TBD*                   | *TBD*                   | *TBD*                   | *TBD*                      | *TBD*            |
+| Persons              | *TBD*                   | *TBD*                   | *TBD*                   | *TBD*                      | *TBD*            |
+| RelationshipStrength | *NA*                    | *TBD*                   | *NA*                    | *NA*                       | *NA*             |
 
 As of May 2019, there are 28 functions total that can be coded based on the available API methods. 12 are complete, while 16 functions still need to be coded (representing ~43% coverage).
 

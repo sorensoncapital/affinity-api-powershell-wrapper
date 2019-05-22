@@ -1,6 +1,15 @@
+param(
+    # Cache type
+    [Parameter(Mandatory = $false,
+               Position = 0)]
+    [ValidateSet('ScriptVariable','EnvironmentVariable')]
+    [string]
+    $private:CacheType = 'ScriptVariable'
+)
+
 # Get public and private function definition files
-$script:Public  = @( Get-ChildItem -Path "$PSScriptRoot\Public" -Recurse -Filter "*.ps1" -ErrorAction SilentlyContinue )
-$script:Private = @( Get-ChildItem -Path "$PSScriptRoot\Private" -Recurse -Filter "*.ps1" -ErrorAction SilentlyContinue )
+$private:Public  = @( Get-ChildItem -Path "$PSScriptRoot\Public" -Recurse -Filter "*.ps1" -ErrorAction SilentlyContinue )
+$private:Private = @( Get-ChildItem -Path "$PSScriptRoot\Private" -Recurse -Filter "*.ps1" -ErrorAction SilentlyContinue )
 
 # Dot source the files
 Foreach($import in @($Public + $Private)) {
@@ -23,14 +32,28 @@ Set-Variable -Name AffinityStandardFieldValueTypes -Scope script -Option Constan
     "Ranked Dropdown"
 )
 
-# Select type of cache ('ScriptVariable' or 'EnvironmentVariable')
-#   'EnvironmentVariable' can be useful in certain types of deployments (Azure Functions)
-#   Eventually need to add a config file instead of these ham-fisted defaults
-Set-Variable -Name AffinityCacheType -Scope script -Option Constant -Value @{
-    LastList                        = 'EnvironmentVariable'
-    AllLists                        = 'EnvironmentVariable'
-    OrganizationGlobalFieldHeaders  = 'EnvironmentVariable'
-    Setting                         = 'ScriptVariable'
+# Set cache type ('ScriptVariable' or 'EnvironmentVariable') based on args
+# 'EnvironmentVariable' can be useful in certain types of deployments (Azure Functions)
+# Need to set TTL on the EnvironmentVariable cache
+
+switch ($CacheType) {
+    'EnvironmentVariable' {
+        Set-Variable -Name AffinityCacheType -Scope script -Option Constant -Value @{
+            LastList                        = 'EnvironmentVariable'
+            AllLists                        = 'EnvironmentVariable'
+            OrganizationGlobalFieldHeaders  = 'EnvironmentVariable'
+            Setting                         = 'ScriptVariable'      # Needs to be ScriptVariable
+        }
+        break
+    }
+    Default {
+        Set-Variable -Name AffinityCacheType -Scope script -Option Constant -Value @{
+            LastList                        = 'ScriptVariable'
+            AllLists                        = 'ScriptVariable'
+            OrganizationGlobalFieldHeaders  = 'ScriptVariable'
+            Setting                         = 'ScriptVariable'
+        }
+    }
 }
 
 # Export only the functions using PowerShell standard verb-noun naming.

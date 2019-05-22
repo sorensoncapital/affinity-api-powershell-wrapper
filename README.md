@@ -62,19 +62,21 @@ foreach ($entry in $ListEntries) {
 
 To conform to PowerShell naming conventions and best practices, here's the reference for all of the functions developed to-date:
 
-| Affinity<br/>Resource     | Create<br/>New-         | Read<br/>Get-           | Update<br/>Set-         | Delete<br/>Remove-         | Search<br/>Find- |
-| ------------------------- |:-----------------------:|:-----------------------:|:-----------------------:|:--------------------------:|:----------------:|
-| Entity Files              | *TBD*                   | *TBD*                   | ~~NA~~                  | ~~NA~~                     | ~~NA~~           |
-| Field Values              | New-AffinityFieldValue  | Get-AffinityFieldValue  | Set-AffinityFieldValue  | Remove-AffinityFieldValue  | ~~NA~~           |
-| List Entries              | *TBD*                   | Get-AffinityListEntry   | ~~NA~~                  | *TBD*                      | ~~NA~~           |
-| Lists                     | ~~NA~~                  | Get-AffinityList        | ~~NA~~                  | ~~NA~~                     | ~~NA~~           |
-| Notes                     | New-AffinityNote        | Get-AffinityNote        | ~~NA~~                  | ~~NA~~                     | ~~NA~~           |
-| Opportunities             | New-AffinityOpportunity | Get-AffinityOpportunity | Set-AffinityOpportunity | Remove-AffinityOpportunity | *TBD*            |
-| Organizations             | *TBD*                   | *TBD*                   | *TBD*                   | *TBD*                      | *TBD*            |
-| Persons                   | *TBD*                   | *TBD*                   | *TBD*                   | *TBD*                      | *TBD*            |
-| Relationship<br/>Strength | ~~NA~~                  | *TBD*                   | ~~NA~~                  | ~~NA~~                     | ~~NA~~           |
+| Affinity<br/>Resource           | Create<br/>`New-`       | Read<br/>`Get-`                | Update<br/>`Set-`       | Delete<br/>`Remove-`       | Search<br/>`Find-`|
+| ------------------------------- |:-----------------------:|:------------------------------:|:-----------------------:|:--------------------------:|:-----------------:|
+| Entity Files                    | *TBD*                   | *TBD*                          | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |
+| Field Values                    | New-AffinityFieldValue  | Get-AffinityFieldValue         | Set-AffinityFieldValue  | Remove-AffinityFieldValue  | ~~NA~~            |
+| List Entries                    | *TBD*                   | Get-AffinityListEntry          | ~~NA~~                  | *TBD*                      | ~~NA~~            |
+| Lists                           | ~~NA~~                  | Get-AffinityList               | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |
+| Notes                           | New-AffinityNote        | Get-AffinityNote               | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |
+| Opportunities                   | New-AffinityOpportunity | Get-AffinityOpportunity        | Set-AffinityOpportunity | Remove-AffinityOpportunity | *TBD*             |
+| Organizations                   | *TBD*                   | *TBD*                          | *TBD*                   | *TBD*                      | *TBD*             |
+| Org. Global<br/>Field Headers   | ~~NA~~                  | Get-AffinityGlobalFieldHeaders | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |
+| Persons                         | *TBD*                   | *TBD*                          | *TBD*                   | *TBD*                      | *TBD*             |
+| Person Global<br/>Field Headers | ~~NA~~                  | *TBD*                          | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |
+| Relationship<br/>Strength       | ~~NA~~                  | *TBD*                          | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |
 
-As of May 2019, there are 28 functions total that can be coded based on the available API methods. 12 are complete, while 16 functions still need to be coded (representing ~43% coverage).
+As of May 2019, there are 30 logical functions that should be coded based on the available API methods. 14 are complete, while 16 functions still need to be coded (representing ~47% coverage).
 
 ## Authors
 

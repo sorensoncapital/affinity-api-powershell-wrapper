@@ -71,7 +71,7 @@ To conform to PowerShell naming conventions and best practices, here's the refer
 | Notes                           | New-AffinityNote        | Get-AffinityNote               | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |
 | Opportunities                   | New-AffinityOpportunity | Get-AffinityOpportunity        | Set-AffinityOpportunity | Remove-AffinityOpportunity | *TBD*             |
 | Organizations                   | *TBD*                   | *TBD*                          | *TBD*                   | *TBD*                      | *TBD*             |
-| Org. Global<br/>Field Headers   | ~~NA~~                  | Get-AffinityGlobalFieldHeaders | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |
+| Org. Global<br/>Field Headers   | ~~NA~~                | Get-Affinity<br/>GlobalFieldHeader | ~~NA~~                | ~~NA~~                     | ~~NA~~            |
 | Persons                         | *TBD*                   | *TBD*                          | *TBD*                   | *TBD*                      | *TBD*             |
 | Person Global<br/>Field Headers | ~~NA~~                  | *TBD*                          | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |
 | Relationship<br/>Strength       | ~~NA~~                  | *TBD*                          | ~~NA~~                  | ~~NA~~                     | ~~NA~~            |

@@ -12,7 +12,7 @@
 RootModule = 'AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.20'
+ModuleVersion = '0.0.21'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -114,26 +114,26 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @('powershell', 'api', 'affinity', 'affinity-co', 'affinity-crm', 'powershell-module')
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/sorensoncapital/affinity-api-powershell-wrapper/blob/master/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/sorensoncapital/affinity-api-powershell-wrapper'
 
         # A URL to an icon representing this module.
         # IconUri = ''
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = 'v0.0.21 - Add README, FieldValues help'
 
     } # End of PSData hashtable
 
 } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
-# HelpInfoURI = ''
+HelpInfoURI = 'https://github.com/sorensoncapital/affinity-api-powershell-wrapper'
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
 # DefaultCommandPrefix = ''

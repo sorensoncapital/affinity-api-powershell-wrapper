@@ -1,16 +1,39 @@
 <#
 .Synopsis
-    Short description
+    Read field-values for an organization_id, opportunity_id, or list_entry_id
 .DESCRIPTION
-    Long description
+    This function returns a PSObject containing all the field-values related to a given key.
+
+    Without the -Expand switch, the function returns the raw field values from Affinity, which is a bit cumbersome
+    to use without a detailed understanding of Affinity's data model. Leveraging the -Expand switch, the function
+    returns a rich PSObject that contains field name and other metadata in addition to the field values.
+.PARAMETER OrganizationID
+    The organization_id or entity.id from Affinity
+.PARAMETER OpportunityID
+    The opportunity_id from Affinity
+.PARAMETER ListEntryID
+    The list_entry_id from Affinity
+.PARAMETER ListID
+    The list_id from Affinity
+.PARAMETER Expand
+    Set switch to combine field names and other metadata in rich PSObject
 .EXAMPLE
-    Example of how to use this cmdlet
-.INPUTS
-    Inputs to this cmdlet (if any)
+    $ListEntries = Get-AffinityListEntry -ListName 'List'
+
+    foreach ($entry in $ListEntries) {
+        $EntryFieldValues = Get-AffinityFieldValue -OrganizationID $entry.entity.id -ListID $entry.list_id -Expand
+        Write-Output $EntryFieldValues.'Status'.field_value
+    }
 .OUTPUTS
-    Output from this cmdlet (if any)
+    System.Management.Automation.PSObject
 .NOTES
-    Need to implement person_id, opportunity_id, list_entry_id
+    Need to implement person_id. Need to test opportunity_id, list_entry_id.
+.LINK
+    https://api-docs.affinity.co/#fields
+.LINK
+    https://api-docs.affinity.co/#field-values
+.LINK
+    https://api-docs.affinity.co/#the-field-value-resource
 .LINK
     https://api-docs.affinity.co/#get-field-values
 #>

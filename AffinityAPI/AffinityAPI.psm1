@@ -24,7 +24,8 @@ Set-Variable -Name AffinityStandardFieldValueTypes -Scope script -Option Constan
 )
 
 # Select type of cache ('ScriptVariable' or 'EnvironmentVariable')
-# 'EnvironmentVariable' can be useful in certain types of deployments (Azure Functions)
+#   'EnvironmentVariable' can be useful in certain types of deployments (Azure Functions)
+#   Eventually need to add a config file instead of these ham-fisted defaults
 Set-Variable -Name AffinityCacheType -Scope script -Option Constant -Value @{
     LastList                        = 'EnvironmentVariable'
     AllLists                        = 'EnvironmentVariable'

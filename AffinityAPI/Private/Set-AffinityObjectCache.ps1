@@ -44,7 +44,13 @@ function Set-AffinityObjectCache {
                 break
             }
             'EnvironmentVariable' {
-                $EnvOutput = $Value | ConvertTo-CliXml
+                if ($Value -is [string] -or $Value -is [char] -or $Value -is [byte] -or $Value -is [int] -or
+                    $Value -is [long] -or $Value -is [decimal] -or $Value -is [single] -or $Value -is [double]) {
+                    $EnvOutput = $Value
+                }
+                else {
+                    $EnvOutput = $Value | ConvertTo-CliXml
+                }
 
                 if ($EnvOutput.length -le 32767) {
                     $EnvName = ConvertTo-EnvironmentVariableCase -Name $Name

@@ -11,7 +11,14 @@ param(
                Position = 1)]
     [ValidateSet('ScriptVariable','EnvironmentVariable')]
     [string]
-    $SettingCacheType = 'ScriptVariable'
+    $SettingCacheType = 'ScriptVariable',
+
+    # Setting object type,
+    [Parameter(Mandatory = $false,
+    Position = 2)]
+    [ValidateSet('Credential','String')]
+    [string]
+    $SettingObjectType = 'Credential'
 )
 
 # Get public and private function definition files
@@ -49,6 +56,7 @@ Set-Variable -Name AffinityStandardFieldValueTypes -Scope script -Option Constan
 
 Set-Variable -Name AffinityObjectCacheType -Scope script -Option Constant -Value $ObjectCacheType
 Set-Variable -Name AffinitySettingCacheType -Scope script -Option Constant -Value $SettingCacheType
+Set-Variable -Name AffinitySettingObjectType -Scope script -Option Constant -Value $SettingObjectType
 
 # Export only the functions using PowerShell standard verb-noun naming.
 # Be sure to list each exported functions in the FunctionsToExport field of the module manifest file.

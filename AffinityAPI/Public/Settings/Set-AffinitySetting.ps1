@@ -36,16 +36,29 @@ function Set-AffinitySetting {
     )
 
     process {
-        switch ($AffinitySettingCacheType) {
-            'ScriptVariable' {
-                $script:AffinityCredentials = $Credentials
-                $script:AffinityBaseUrl = $BaseUrl
+        switch ($AffinitySettingObjectType) {
+            'Credential' {
+                $SAOCParameters = @{
+                    'Name'      = 'AffinityCredentials'
+                    'CacheType' = $AffinitySettingCacheType
+                    'Value'     = $Credentials
+                }
+
+                break
             }
-            'EnvironmentVariable' {
-                $env:AFFINITY_CREDENTIALS = ( $Credentials | ConvertTo-CliXml )
-                $env:AFFINITY_BASE_URL = $BaseUrl
+            'String' {
+                $SAOCParameters = @{
+                    'Name'      = 'AffinityApiKey'
+                    'CacheType' = $AffinitySettingCacheType
+                    'Value'     = $Credentials.GetNetworkCredential().password
+                }
+
+                break
             }
         }
+
+        Set-AffinityObjectCache @SAOCParameters
+        Set-AffinityObjectCache -Name AffinityBaseUrl -Value $BaseUrl
 
         return $true
     }

@@ -41,7 +41,10 @@ function Get-AffinityObjectCache {
                 $EnvName = ConvertTo-EnvironmentVariableCase -Name $Name
                 $EnvOutput = Get-Content -Path "env:$EnvName" -ErrorAction SilentlyContinue
 
-                if ($EnvOutput) { $Output = $EnvOutput | ConvertFrom-CliXml }
+                if ($EnvOutput) {
+                    if ([bool]($EnvOutput -as [xml])) { $Output = $EnvOutput | ConvertFrom-CliXml }
+                    else { $Output = $EnvOutput }
+                }
                 else { $Output = $null}
 
                 break

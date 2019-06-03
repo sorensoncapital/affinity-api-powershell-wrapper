@@ -24,8 +24,7 @@ function Invoke-AffinityAPIRequest
         [Parameter(Mandatory = $false,
                    Position = 0)]
         [ValidateNotNullorEmpty()]
-        [pscredential]
-        $Credentials = (Get-AffinitySetting -Credentials),
+        $Credentials = ( Get-AffinitySetting -Credentials ),
 
         # HTTP Method
         [Parameter(Mandatory = $false,
@@ -39,7 +38,7 @@ function Invoke-AffinityAPIRequest
                    Position = 2)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $BaseUrl = (Get-AffinitySetting -BaseUrl),
+        $BaseUrl = ( Get-AffinitySetting -BaseUrl ),
 
         # Affinity API URL fragment
         [Parameter(Mandatory = $true,
@@ -56,24 +55,35 @@ function Invoke-AffinityAPIRequest
     )
 
     Begin {
-        # Strip username (Affinity currently accepts any username, PWSH will not accept a null or empty UserName)
-        if ($Credentials.UserName) {
-            $Credentials = New-Object System.Management.Automation.PSCredential -ArgumentList (
-                [pscustomobject] @{
-                    UserName = ' '
-                    Password = $Credentials.Password
+        switch ($AffinitySettingObjectType) {
+            'Credential' {
+                # Strip username (Affinity currently accepts any username, PWSH will not accept a null or empty UserName)
+                if ($Credentials.UserName) {
+                    $Credentials = New-Object System.Management.Automation.PSCredential -ArgumentList (
+                        [pscustomobject] @{
+                            UserName = ' '
+                            Password = $Credentials.Password
+                        }
+                    )
                 }
-            )
+
+                $IRMParameters = @{'Credential' = $Credentials}
+                if ($PSVersionTable.PSVersion.Major -ge 6) { $IRMParameters.Add('Authentication', 'Basic') }
+
+                break
+            }
+            'String' {
+                $Base64Auth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$Credentials"))
+
+                $IRMParameters = @{'Headers' = @{ 'Authorization' = "Basic $Base64Auth" }}
+
+                break
+            }
         }
     }
     Process {
-        $IRMParameters = @{
-            'Method'            = $Method
-            'Uri'               = ( "{0}/{1}" -f $BaseUrl, $Fragment )
-            'Credential'        = $Credentials
-        }
-
-        if ($PSVersionTable.PSVersion.Major -ge 6 ) { $IRMParameters.Add('Authentication', 'Basic') }
+        $IRMParameters.Add('Method', $Method)
+        $IRMParameters.Add('Uri', ( "{0}/{1}" -f $BaseUrl, $Fragment ))
 
         # Handle content
         if ($Content) {

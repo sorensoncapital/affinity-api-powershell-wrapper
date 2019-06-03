@@ -34,29 +34,24 @@ function Get-AffinitySetting {
     process {
         switch ($PSCmdlet.ParameterSetName) {
             'Credentials' {
-                switch ($AffinitySettingCacheType) {
-                    'ScriptVariable' {
-                        if ($AffinityCredentials) { $Output = $AffinityCredentials }
+                switch ($AffinitySettingObjectType) {
+                    'Credential' {
+                        $Output = Get-AffinityObjectCache -Name AffinityCredentials -CacheType $AffinitySettingCacheType
                         break
                     }
-                    'EnvironmentVariable' {
-                        if ($env:AFFINITY_CREDENTIALS) { $Output = $env:AFFINITY_CREDENTIALS | ConvertFrom-CliXml }
+                    'String' {
+                        $Output = Get-AffinityObjectCache -Name AffinityApiKey -CacheType $AffinitySettingCacheType
                         break
                     }
                 }
+
+                break
             }
 
             'BaseUrl' {
-                switch ($AffinitySettingCacheType) {
-                    'ScriptVariable' {
-                        if ($AffinityBaseUrl) { $Output = $AffinityBaseUrl }
-                        break
-                    }
-                    'EnvironmentVariable' {
-                        if ($env:AFFINITY_BASE_URL) { $Output = $env:AFFINITY_BASE_URL | ConvertFrom-CliXml }
-                        break
-                    }
-                }
+                $Output = Get-AffinityObjectCache -Name AffinityBaseUrl
+                if (!$Output) { $Output = $AffinityStandardBaseUrl }
+                break
             }
         }
 

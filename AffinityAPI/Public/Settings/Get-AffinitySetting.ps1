@@ -34,7 +34,7 @@ function Get-AffinitySetting {
     process {
         switch ($PSCmdlet.ParameterSetName) {
             'Credentials' {
-                switch ($AffinityCacheType.Setting) {
+                switch ($AffinitySettingCacheType) {
                     'ScriptVariable' {
                         if ($AffinityCredentials) { $Output = $AffinityCredentials }
                         break
@@ -47,7 +47,7 @@ function Get-AffinitySetting {
             }
 
             'BaseUrl' {
-                switch ($AffinityCacheType.Setting) {
+                switch ($AffinitySettingCacheType) {
                     'ScriptVariable' {
                         if ($AffinityBaseUrl) { $Output = $AffinityBaseUrl }
                         break

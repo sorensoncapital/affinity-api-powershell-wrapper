@@ -36,7 +36,7 @@ function Set-AffinitySetting {
     )
 
     process {
-        switch ($AffinityCacheType.Setting) {
+        switch ($AffinitySettingCacheType) {
             'ScriptVariable' {
                 $script:AffinityCredentials = $Credentials
                 $script:AffinityBaseUrl = $BaseUrl

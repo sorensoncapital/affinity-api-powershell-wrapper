@@ -21,42 +21,11 @@ function Get-AffinityOrganizationGlobalFieldHeader
     Param ( )
 
     Process {
-        switch ($AffinityCacheType.OrganizationGlobalFieldHeaders) {
-            'ScriptVariable' {
-                if ($AffinityLastOrganizationGlobalFieldHeaders) {
-                    $Output = $AffinityLastOrganizationGlobalFieldHeaders
-                    break
-                }
-            }
-            'EnvironmentVariable' {
-                if ($env:AFFINITY_LAST_ORGANIZATION_GLOBAL_FIELD_HEADERS) {
-                    $EnvInput = $env:AFFINITY_LAST_ORGANIZATION_GLOBAL_FIELD_HEADERS | ConvertFrom-CliXml
-
-                    if (($EnvInput | Measure-Object).Count -gt 0) { $Output = $EnvInput }
-
-                    break
-                }
-            }
-        }
+        $Output = Get-AffinityObjectCache -Name AffinityLastOrganizationGlobalFieldHeaders
 
         if (!$Output) {
             $Output = Invoke-AffinityAPIRequest -Method Get -Fragment "organizations/fields"
-
-            switch ($AffinityCacheType.OrganizationGlobalFieldHeaders) {
-                'ScriptVariable' {
-                    $script:AffinityLastOrganizationGlobalFieldHeaders = $Output
-                    break
-                }
-                'EnvironmentVariable' {
-                    $EnvOutput = $Output | ConvertTo-CliXml
-
-                    if ($EnvOutput.length -le 32767) {
-                        $env:AFFINITY_LAST_ORGANIZATION_GLOBAL_FIELD_HEADERS = $EnvOutput
-                    }
-
-                    break
-                }
-            }
+            Set-AffinityObjectCache -Name AffinityLastOrganizationGlobalFieldHeaders -Value $Output
         }
 
         return $Output

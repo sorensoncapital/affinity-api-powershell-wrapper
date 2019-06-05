@@ -20,17 +20,18 @@ There are two main methods to install this PowerShell module:
 
 ```powershell
 # If the user has admin rights:
-Install-Module AffinityAPI
+Install-Module -Name AffinityAPI
 # If the user has user rights:
-Install-Module AffinityAPI -Scope CurrentUser
+Install-Module -Name AffinityAPI -Scope CurrentUser
 # If the user has very limited rights:
-Save-Module AffinityAPI
+Save-Module -Name AffinityAPI
 ```
 #### 2) Manual
 
-```
-Download Zip then unzip AffinityAPI folder to a PowerShell module folder
-```
+
+*Clone or download* > Download ZIP
+unzip AffinityAPI folder to a PowerShell module folder
+
 
 ### Usage
 Once the module is installed, usage is pretty straightforward
@@ -99,5 +100,5 @@ This project is licensed under the MIT License - see the [license](LICENSE) file
 
 * [Adam Najmanowicz](https://blog.najmanowicz.com) and [Michael West](https://michaellwest.blogspot.com) at [SitecorePowerShell](https://github.com/SitecorePowerShell) for the [ConvertFrom-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertFrom-CliXml.ps1) and [ConvertTo-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertTo-CliXml.ps1) modules
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEwOTY1OTQ4Ml19
+eyJoaXN0b3J5IjpbLTE5NzgyNjgxMzVdfQ==
 -->

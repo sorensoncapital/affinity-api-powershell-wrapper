@@ -98,3 +98,6 @@ This project is licensed under the MIT License - see the [license](LICENSE) file
 ## Acknowledgments
 
 * [Adam Najmanowicz](https://blog.najmanowicz.com) and [Michael West](https://michaellwest.blogspot.com) at [SitecorePowerShell](https://github.com/SitecorePowerShell) for the [ConvertFrom-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertFrom-CliXml.ps1) and [ConvertTo-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertTo-CliXml.ps1) modules
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjEwOTY1OTQ4Ml19
+-->

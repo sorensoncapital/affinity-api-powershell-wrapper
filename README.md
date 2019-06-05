@@ -29,8 +29,8 @@ Save-Module -Name AffinityAPI
 #### 2) Manual
 
 
-*Clone or download* > Download ZIP
-unzip AffinityAPI folder to a PowerShell module folder
+*Clone or download* > *Download ZIP*
+Unzip `AffinityAPI` folder to a PowerShell module folder
 
 
 ### Usage
@@ -40,7 +40,7 @@ Once the module is installed, usage is pretty straightforward
 # First, import AffinityAPI
 Import-Module AffinityAPI
 
-# Note: If the module is properly installed, the module will also auto-load based on functions called
+# If the module is properly installed, the module will also auto-load based on functions called
 
 # Next, prompt user for username and API key (any username is acceptable)
 Set-AffinitySetting         
@@ -51,11 +51,11 @@ Export-AffinitySetting
 # Optionally, import .cred file to avoid prompting the user at runtime
 Import-AffinitySetting -SettingUserName username
 
-# Note: Typically in automated settings, Set-AffinitySetting and Export-AffinitySetting would only 
-#       be run once for each computer / user combination.
-#
-#       In interactive settings, just calling Set-AffinitySetting will collect the user's credentials
-#       at runtime.
+# Typically in automated settings, Set-AffinitySetting and Export-AffinitySetting would only 
+# be run once for each computer / user combination.
+
+# In interactive settings, just calling Set-AffinitySetting will collect the user's credentials
+# at runtime.
 
 # Finally, start scripting
 $ListEntries = Get-AffinityListEntry -ListName 'List'
@@ -94,11 +94,11 @@ See also the list of [contributors](https://github.com/sorensoncapital/affinity-
 
 ## License
 
-This project is licensed under the MIT License - see the [license](LICENSE) file for details
+This project is licensed under the GPL License - see the [license](LICENSE) file for details
 
 ## Acknowledgments
 
 * [Adam Najmanowicz](https://blog.najmanowicz.com) and [Michael West](https://michaellwest.blogspot.com) at [SitecorePowerShell](https://github.com/SitecorePowerShell) for the [ConvertFrom-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertFrom-CliXml.ps1) and [ConvertTo-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertTo-CliXml.ps1) modules
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NzgyNjgxMzVdfQ==
+eyJoaXN0b3J5IjpbOTI0NDUzOTMzXX0=
 -->

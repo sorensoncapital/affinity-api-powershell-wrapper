@@ -30,6 +30,7 @@ Save-Module -Name AffinityAPI
 
 
 *Clone or download* > *Download ZIP*
+
 Unzip `AffinityAPI` folder to a PowerShell module folder
 
 
@@ -99,5 +100,5 @@ This project is licensed under the GPL License - see the [license](LICENSE) file
 
 * [Adam Najmanowicz](https://blog.najmanowicz.com) and [Michael West](https://michaellwest.blogspot.com) at [SitecorePowerShell](https://github.com/SitecorePowerShell) for the [ConvertFrom-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertFrom-CliXml.ps1) and [ConvertTo-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertTo-CliXml.ps1) modules
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2NjY4NzMxOF19
+eyJoaXN0b3J5IjpbMTMwNjczMjk2OCwxOTY2Njg3MzE4XX0=
 -->

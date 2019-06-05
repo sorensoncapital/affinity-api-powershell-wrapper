@@ -96,6 +96,7 @@ function Get-AffinityNote
                 $Content = @{ 'creator_id' = $CreatorID}
                 break
             }
+            Default { throw [System.NotSupportedException] "ParameterSet not developed" }
         }
 
         Invoke-AffinityAPIRequest -Method Get -Fragment $Fragment -Content $Content

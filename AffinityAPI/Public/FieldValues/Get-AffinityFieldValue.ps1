@@ -125,7 +125,7 @@ function Get-AffinityFieldValue
                 $IAARParameters = @{ Fragment = ("field-values?list_entry_id={0}" -f $ListEntryID) }
                 break
             }
-            Default { <# Throw Error #> }
+            Default { throw [System.NotSupportedException] "ParameterSet not developed" }
         }
 
         # Retrieve field values
@@ -183,16 +183,16 @@ function Get-AffinityFieldValue
                     }
 
                     if ($fieldvalue.allows_multiple) {
-                        $multiplefieldvalues = $FieldValues | `
-                                            Where-Object { $_.field_id -eq $fieldvalue.field_id } | `
+                        $multiplefieldvalues = $FieldValues |
+                                            Where-Object { $_.field_id -eq $fieldvalue.field_id } |
                                             Select-Object @{N='field_value_id'; E={$_.id}}, @{N='field_value'; E={$_.value}}
 
                         $fieldvalue.Add('field_values', $multiplefieldvalues)
                         $multiplefieldvalues = $null
                     }
                     else {
-                        $singlefieldvalue = $FieldValues | `
-                                            Where-Object { $_.field_id -eq $fieldvalue.field_id } | `
+                        $singlefieldvalue = $FieldValues |
+                                            Where-Object { $_.field_id -eq $fieldvalue.field_id } |
                                             Select-Object -First 1
 
                         $fieldvalue.Add('field_value_id', $singlefieldvalue.id)

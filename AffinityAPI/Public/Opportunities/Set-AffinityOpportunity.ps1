@@ -62,6 +62,6 @@ function Set-AffinityOpportunity
 
             Invoke-AffinityAPIRequest -Method Put -Fragment ("opportunities/{0}" -f $OpportunityID) -Content $Content
         }
-        else { throw [System.ArgumentNullException] "No paramters to update" }
+        else { throw [System.ArgumentNullException] "No fields to update" }
     }
 }

@@ -30,6 +30,6 @@ function Test-NestedContainer {
             if ($value -is [System.Collections.ICollection]) { return $true }
         }
 
-        $false
+        return $false
     }
 }

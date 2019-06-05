@@ -37,25 +37,22 @@ function Get-AffinitySetting {
                 switch ($AffinitySettingObjectType) {
                     'Credential' {
                         $Output = Get-AffinityObjectCache -Name AffinityCredentials -CacheType $AffinitySettingCacheType
-                        break
                     }
                     'String' {
                         $Output = Get-AffinityObjectCache -Name AffinityApiKey -CacheType $AffinitySettingCacheType
-                        break
                     }
+                    Default { throw [System.NotSupportedException] "AffinitySettingObjectType not developed" }
                 }
 
-                break
+                if ($Output) { return $Output }
+                else { throw [System.InvalidOperationException] "Set Credentials with Set-AffinitySetting" }
             }
-
             'BaseUrl' {
                 $Output = Get-AffinityObjectCache -Name AffinityBaseUrl
                 if (!$Output) { $Output = $AffinityStandardBaseUrl }
-                break
+                return $Output
             }
+            Default { throw [System.NotSupportedException] "ParameterSet not developed" }
         }
-
-        if ($Output) { return $Output }
-        else { return $false }
     }
 }

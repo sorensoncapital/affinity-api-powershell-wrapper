@@ -57,7 +57,8 @@ function Invoke-AffinityAPIRequest
     Begin {
         switch ($AffinitySettingObjectType) {
             'Credential' {
-                # Strip username (Affinity currently accepts any username, PWSH will not accept a null or empty UserName)
+                # Strip username (Affinity currently accepts any username, PWSH will only accept a null  or empty
+                # UserName in PWSH v7.0+)
                 if ($Credentials.UserName) {
                     $Credentials = New-Object System.Management.Automation.PSCredential -ArgumentList (
                         [pscustomobject] @{
@@ -74,11 +75,11 @@ function Invoke-AffinityAPIRequest
             }
             'String' {
                 $Base64Auth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$Credentials"))
-
                 $IRMParameters = @{'Headers' = @{ 'Authorization' = "Basic $Base64Auth" }}
 
                 break
             }
+            Default { throw [System.NotSupportedException] "AffinitySettingObjectType not developed" }
         }
     }
     Process {

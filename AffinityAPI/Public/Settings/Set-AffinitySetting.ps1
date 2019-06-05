@@ -55,11 +55,11 @@ function Set-AffinitySetting {
 
                 break
             }
+            Default { throw [System.NotSupportedException] "AffinitySettingObjectType not developed" }
         }
 
-        Set-AffinityObjectCache @SAOCParameters
-        Set-AffinityObjectCache -Name AffinityBaseUrl -Value $BaseUrl
-
-        return $true
+        if ((Set-AffinityObjectCache @SAOCParameters) -and
+            (Set-AffinityObjectCache -Name AffinityBaseUrl -Value $BaseUrl)) { return $true }
+        else { return $false }
     }
 }

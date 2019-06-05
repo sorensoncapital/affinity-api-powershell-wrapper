@@ -54,7 +54,7 @@ function Export-AffinitySetting {
         switch ($PSCmdlet.ParameterSetName) {
             'AutoName'      { $ExportPath = Join-Path -Path $SettingDir -ChildPath $SettingName }
             'ManualName'    { $ExportPath = $SettingPath                                        }
-            Default         { <# Throw error #>                                                 }
+            Default         { throw [System.NotSupportedException] "ParameterSet not developed" }
         }
 
         New-Item -Path $ExportPath -Force | Out-Null

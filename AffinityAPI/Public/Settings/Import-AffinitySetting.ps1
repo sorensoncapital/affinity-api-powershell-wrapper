@@ -52,7 +52,7 @@ function Import-AffinitySetting {
             'ManualName' {
                 $ImportPath = $SettingPath
             }
-            Default { <# Throw error #> }
+            Default { throw [System.NotSupportedException] "ParameterSet not developed" }
         }
 
         if (Test-Path $ImportPath) {

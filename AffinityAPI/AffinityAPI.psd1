@@ -12,7 +12,7 @@
 RootModule = 'AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.24'
+ModuleVersion = '0.0.25'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -129,10 +129,10 @@ PrivateData = @{
         ProjectUri = 'https://github.com/sorensoncapital/affinity-api-powershell-wrapper'
 
         # A URL to an icon representing this module.
-        # IconUri = ''
+        IconUri = 'https://avatars0.githubusercontent.com/u/47189293'
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'v0.0.22 - Rationale cache defaults overridden by Import-Module ArgumentList'
+        ReleaseNotes = 'v0.0.25 - Simplify cache, expand error coverage'
 
     } # End of PSData hashtable
 

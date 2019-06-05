@@ -15,6 +15,7 @@
 
 function Set-AffinityObjectCache {
     [CmdletBinding(PositionalBinding = $true)]
+    [OutputType([bool])]
     param (
         # Variable name
         [Parameter(Mandatory = $true,
@@ -41,24 +42,20 @@ function Set-AffinityObjectCache {
         switch ($CacheType) {
             'ScriptVariable' {
                 Set-Variable -Name $Name -Scope script -Value $Value
-                break
+                return $true
             }
             'EnvironmentVariable' {
-                if ($Value -is [string] -or $Value -is [char] -or $Value -is [byte] -or $Value -is [int] -or
-                    $Value -is [long] -or $Value -is [decimal] -or $Value -is [single] -or $Value -is [double]) {
-                    $EnvOutput = $Value
-                }
-                else {
-                    $EnvOutput = $Value | ConvertTo-CliXml
-                }
+                if ($Value -is [string] -or $Value -is [System.ValueType]) { $EnvOutput = $Value }
+                else { $EnvOutput = $Value | ConvertTo-CliXml }
 
                 if ($EnvOutput.length -le 32767) {
                     $EnvName = ConvertTo-EnvironmentVariableCase -Name $Name
-                    $EnvOutput = Set-Content -Path "env:$EnvName" -Value $EnvOutput -ErrorAction SilentlyContinue
+                    $EnvOutput = Set-Content -Path "env:$EnvName" -Value $EnvOutput
+                    return $true
                 }
-
-                break
+                else { return $false }
             }
+            Default { throw [System.NotSupportedException] "CacheType not developed" }
         }
     }
 }

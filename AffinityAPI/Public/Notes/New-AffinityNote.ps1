@@ -73,17 +73,17 @@ function New-AffinityNote
     Process {
         # Add mandatory parameters
         switch ($PSCmdlet.ParameterSetName) {
-           'Content'            { $Content = @{ 'content' =         $NoteContent             } }
-           'GmailID'            { $Content = @{ 'gmail_id' =        $GmailID                 } }
-           Default              { <# Throw Error #>                                            }
+           'Content'            { $Content = @{ 'content' =         $NoteContent                  } }
+           'GmailID'            { $Content = @{ 'gmail_id' =        $GmailID                      } }
+           Default              { throw [System.NotSupportedException] "ParameterSet not developed" }
         }
 
         # Add optional parameters
-        if ($PersonIDs)         { $Content.Add( 'person_ids',       $PersonIDs               ) }
-        if ($OrganizationIDs)   { $Content.Add( 'organization_ids', $OrganizationIDs         ) }
-        if ($OpportunityIDs)    { $Content.Add( 'opportunity_ids',  $OpportunityIDs          ) }
-        if ($CreatorID)         { $Content.Add( 'creator_id',       $CreatorID               ) }
-        if ($CreatedAt)         { $Content.Add( 'created_at',       $CreatedAt.ToString('o') ) }
+        if ($PersonIDs)         { $Content.Add( 'person_ids',       $PersonIDs                    ) }
+        if ($OrganizationIDs)   { $Content.Add( 'organization_ids', $OrganizationIDs              ) }
+        if ($OpportunityIDs)    { $Content.Add( 'opportunity_ids',  $OpportunityIDs               ) }
+        if ($CreatorID)         { $Content.Add( 'creator_id',       $CreatorID                    ) }
+        if ($CreatedAt)         { $Content.Add( 'created_at',       $CreatedAt.ToString('o')      ) }
 
         Invoke-AffinityAPIRequest -Method Post -Fragment "notes" -Content $Content
     }

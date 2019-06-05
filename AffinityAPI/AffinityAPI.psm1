@@ -50,12 +50,19 @@ Set-Variable -Name AffinityStandardFieldValueTypes -Scope script -Option Constan
     "Ranked Dropdown"
 )
 
-# Set cache type ('ScriptVariable' or 'EnvironmentVariable') based on args
+# Initialize object cache type ('ScriptVariable' or 'EnvironmentVariable') based on args
+# 'ScriptVariable' means that objects are cached as $script:var
+# 'EnvironmentVariable' means that objects are cached as $env:var
 # 'EnvironmentVariable' can be useful in certain types of deployments (Azure Functions)
 # Need to set TTL on the EnvironmentVariable cache
 
 Set-Variable -Name AffinityObjectCacheType -Scope script -Option Constant -Value $ObjectCacheType
 Set-Variable -Name AffinitySettingCacheType -Scope script -Option Constant -Value $SettingCacheType
+
+# Initialize setting object type ('Credential' or 'String') based on args
+# 'Credential' means that the API key is stored encrypted as a PSCredential
+# 'String' means that the API key is stored unencrypted as a string
+# 'String' can be useful in very secure deployments (Azure Functions), but is VERY INSECURE otherwise
 Set-Variable -Name AffinitySettingObjectType -Scope script -Option Constant -Value $SettingObjectType
 
 # Export only the functions using PowerShell standard verb-noun naming.

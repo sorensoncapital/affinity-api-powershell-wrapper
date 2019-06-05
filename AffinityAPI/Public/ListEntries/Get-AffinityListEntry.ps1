@@ -72,6 +72,7 @@ function Get-AffinityListEntry
                 $Fragment = "lists/{0}/list-entries/{1}" -f $ListID, $ListEntryID
                 break
             }
+            Default { throw [System.NotSupportedException] "ParameterSet not developed" }
         }
 
         Invoke-AffinityAPIRequest -Method Get -Fragment $Fragment

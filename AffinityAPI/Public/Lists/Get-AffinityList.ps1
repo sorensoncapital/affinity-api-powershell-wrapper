@@ -74,6 +74,7 @@ function Get-AffinityList
 
                 return $Output
             }
+            Default { throw [System.NotSupportedException] "ParameterSet not developed" }
         }
     }
 }

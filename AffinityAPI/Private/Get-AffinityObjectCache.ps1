@@ -34,23 +34,18 @@ function Get-AffinityObjectCache {
     Process {
         switch ($CacheType) {
             'ScriptVariable' {
-                $Output = Get-Variable -Name $Name -Scope script -ValueOnly -ErrorAction SilentlyContinue
-                break
+                return Get-Variable -Name $Name -Scope script -ValueOnly -ErrorAction SilentlyContinue
             }
             'EnvironmentVariable' {
                 $EnvName = ConvertTo-EnvironmentVariableCase -Name $Name
                 $EnvOutput = Get-Content -Path "env:$EnvName" -ErrorAction SilentlyContinue
 
                 if ($EnvOutput) {
-                    if ([bool]($EnvOutput -as [xml])) { $Output = $EnvOutput | ConvertFrom-CliXml }
-                    else { $Output = $EnvOutput }
+                    if ([bool]($EnvOutput -as [xml])) { return $EnvOutput | ConvertFrom-CliXml }
+                    else { return $EnvOutput }
                 }
-                else { $Output = $null}
-
-                break
             }
+            Default { throw [System.NotSupportedException] "CacheType not developed" }
         }
-
-        return $Output
     }
 }

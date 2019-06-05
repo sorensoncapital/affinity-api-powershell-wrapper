@@ -54,8 +54,7 @@ Import-AffinitySetting -SettingUserName username
 # Typically in automated settings, Set-AffinitySetting and Export-AffinitySetting would only 
 # be run once for each computer / user combination.
 
-# In interactive settings, just calling Set-AffinitySetting will collect the user's credentials
-# at runtime.
+# In interactive settings, just calling Set-AffinitySetting will collect the user's credentials at runtime
 
 # Finally, start scripting
 $ListEntries = Get-AffinityListEntry -ListName 'List'
@@ -100,5 +99,5 @@ This project is licensed under the GPL License - see the [license](LICENSE) file
 
 * [Adam Najmanowicz](https://blog.najmanowicz.com) and [Michael West](https://michaellwest.blogspot.com) at [SitecorePowerShell](https://github.com/SitecorePowerShell) for the [ConvertFrom-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertFrom-CliXml.ps1) and [ConvertTo-CliXml](https://github.com/SitecorePowerShell/Console/blob/master/Modules/SPE/ConvertTo-CliXml.ps1) modules
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTI0NDUzOTMzXX0=
+eyJoaXN0b3J5IjpbMTk2NjY4NzMxOF19
 -->

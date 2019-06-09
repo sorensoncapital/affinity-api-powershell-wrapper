@@ -88,7 +88,7 @@ function Invoke-AffinityAPIRequest
 
         # Handle content
         if ($Content) {
-            if (Test-NestedContainer $Content) {
+            if (Test-NestedCollection -Collection $Content) {
                 $IRMParameters.Add('Body', ( $Content | ConvertTo-Json -Compress -Depth 10 ))
                 $IRMParameters.Add('ContentType', 'application/json')
             }

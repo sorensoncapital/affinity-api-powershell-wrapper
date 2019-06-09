@@ -13,7 +13,7 @@
     General notes
 #>
 
-function Test-NestedContainer {
+function Test-NestedCollection {
     [CmdletBinding(PositionalBinding = $true)]
     [OutputType([bool])]
     Param (

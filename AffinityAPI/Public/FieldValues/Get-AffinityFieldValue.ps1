@@ -157,8 +157,10 @@ function Get-AffinityFieldValue
             # Instantiate output hashtable
             $ExpandedFieldValues = @{}
 
-            # Really need to refactor this code ...
-            # Investigate using Join-Object (https://www.powershellgallery.com/packages/Join/2.3.1) then Group-Object
+            # Refactor this code -- investigate using Join-Object then Group-Object
+            # iRon7: https://github.com/iRon7/Join-Object
+            # ili101: https://github.com/ili101/Join-Object
+            # RamblingCookieMonster: https://github.com/RamblingCookieMonster/PowerShell/blob/master/Join-Object.ps1
 
             # Combine Headers with Values
             if ($FieldHeaders -and $FieldValues) {

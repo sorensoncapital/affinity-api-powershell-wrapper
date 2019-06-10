@@ -57,7 +57,7 @@ function Invoke-AffinityAPIRequest
     Begin {
         switch ($AffinitySettingObjectType) {
             'Credential' {
-                # Strip username (Affinity currently accepts any username, PWSH will only accept a null  or empty
+                # Strip username (Affinity currently accepts any username, PWSH will only accept a null or empty
                 # UserName in PWSH v7.0+)
                 if ($Credentials.UserName) {
                     $Credentials = New-Object System.Management.Automation.PSCredential -ArgumentList (

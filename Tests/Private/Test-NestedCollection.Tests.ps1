@@ -1,4 +1,5 @@
-Import-Module ..\affinity-api-powershell-wrapper\AffinityAPI\AffinityAPI.psd1 -ErrorAction Stop
+Get-Module AffinityAPI | Remove-Module -ErrorAction Silent
+Import-Module ..\affinity-api-powershell-wrapper\AffinityAPI\AffinityAPI.psd1 -Force -ErrorAction Stop
 
 InModuleScope AffinityAPI {
     Describe -Name 'Test-NestedCollection' -Tag 'Unit' {
@@ -13,7 +14,7 @@ InModuleScope AffinityAPI {
                 }
             }
 
-            Test-NestedContainer -Collection $NestedHashtable | Should -BeTrue
+            Test-NestedCollection -Collection $NestedHashtable | Should -BeTrue
         }
 
         It 'Returns $true if nested array exists' {
@@ -27,7 +28,7 @@ InModuleScope AffinityAPI {
                 )
             }
 
-            Test-NestedContainer -Collection $NestedArray | Should -BeTrue
+            Test-NestedCollection -Collection $NestedArray | Should -BeTrue
         }
 
         It 'Returns $false if no nested container exists' {
@@ -37,7 +38,7 @@ InModuleScope AffinityAPI {
                 c = 'c'
             }
 
-            Test-NestedContainer -Collection $FlatHashtable | Should -BeFalse
+            Test-NestedCollection -Collection $FlatHashtable | Should -BeFalse
         }
 
         It 'Throws error if input is not hashtable' {
@@ -47,19 +48,19 @@ InModuleScope AffinityAPI {
                 3
             )
 
-            { Test-NestedContainer -Collection $Array } | Should -Throw
+            { Test-NestedCollection -Collection $Array } | Should -Throw
         }
 
         It 'Throws error if input is empty' {
             $EmptyHashtable = @{ }
 
-            { Test-NestedContainer -Collection $EmptyHashtable } | Should -Throw
+            { Test-NestedCollection -Collection $EmptyHashtable } | Should -Throw
         }
 
         It 'Throws error if input is null' {
             $NullInput = $null
 
-            { Test-NestedContainer -Collection $NullInput } | Should -Throw
+            { Test-NestedCollection -Collection $NullInput } | Should -Throw
         }
     }
 }

@@ -12,7 +12,7 @@
 RootModule = 'AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.26'
+ModuleVersion = '0.0.27'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -132,7 +132,7 @@ PrivateData = @{
         IconUri = 'https://avatars0.githubusercontent.com/u/47189293'
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'v0.0.26 - Rename Test-NestedContainer to Test-NestedCollection'
+        ReleaseNotes = 'v0.0.27 - Refactor ObjectCache; add unit test'
 
     } # End of PSData hashtable
 

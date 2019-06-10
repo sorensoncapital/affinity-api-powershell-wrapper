@@ -3,6 +3,10 @@ param(
     [Parameter(Mandatory = $false,
                Position = 0)]
     [ValidateSet('ScriptVariable','EnvironmentVariable')]
+    [ValidateScript({
+        if ($_ -eq 'EnvironmentVariable' -and $PSVersionTable.PSVersion -lt 5.1 ) { $false }
+        else { $true }
+    })]
     [string]
     $ObjectCacheType = 'ScriptVariable',
 
@@ -10,6 +14,10 @@ param(
     [Parameter(Mandatory = $false,
                Position = 1)]
     [ValidateSet('ScriptVariable','EnvironmentVariable')]
+    [ValidateScript({
+        if ($_ -eq 'EnvironmentVariable' -and $PSVersionTable.PSVersion -lt 5.1 ) { $false }
+        else { $true }
+    })]
     [string]
     $SettingCacheType = 'ScriptVariable',
 
@@ -54,6 +62,7 @@ Set-Variable -Name AffinityStandardFieldValueTypes -Scope script -Option Constan
 # 'ScriptVariable' means that objects are cached as $script:var
 # 'EnvironmentVariable' means that objects are cached as $env:var
 # 'EnvironmentVariable' can be useful in certain types of deployments (Azure Functions)
+# 'EnvironmentVariable' only available on PowerShell 5.1+
 # Need to set TTL on the EnvironmentVariable cache
 
 Set-Variable -Name AffinityObjectCacheType -Scope script -Option Constant -Value $ObjectCacheType

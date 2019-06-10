@@ -27,6 +27,10 @@ function Get-AffinityObjectCache {
         [Parameter(Mandatory = $false,
                    Position = 1)]
         [ValidateSet('ScriptVariable','EnvironmentVariable')]
+        [ValidateScript({
+            if ($_ -eq 'EnvironmentVariable' -and (Get-PSVersion).PSVersion -lt 5.1 ) { $false }
+            else { $true }
+        })]
         [string]
         $CacheType = $AffinityObjectCacheType
     )
@@ -41,11 +45,13 @@ function Get-AffinityObjectCache {
                 $EnvOutput = Get-Content -Path "env:$EnvName" -ErrorAction SilentlyContinue
 
                 if ($EnvOutput) {
-                    if ([bool]($EnvOutput -as [xml])) { return $EnvOutput | ConvertFrom-CliXml }
+                    if ([bool]($EnvOutput -as [xml])) {
+                        return [System.Management.Automation.PSSerializer]::Deserialize($EnvOutput)
+                    }
                     else { return $EnvOutput }
                 }
             }
-            Default { throw [System.NotSupportedException] "CacheType not developed" }
+            # Default { throw [System.NotSupportedException] "CacheType not developed" }
         }
     }
 }

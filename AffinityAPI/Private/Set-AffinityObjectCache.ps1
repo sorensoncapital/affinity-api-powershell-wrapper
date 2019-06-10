@@ -28,6 +28,10 @@ function Set-AffinityObjectCache {
         [Parameter(Mandatory = $false,
                    Position = 1)]
         [ValidateSet('ScriptVariable','EnvironmentVariable')]
+        [ValidateScript({
+            if ($_ -eq 'EnvironmentVariable' -and $PSVersionTable.PSVersion -lt 5.1 ) { $false }
+            else { $true }
+        })]
         [string]
         $CacheType = $AffinityObjectCacheType,
 
@@ -46,16 +50,16 @@ function Set-AffinityObjectCache {
             }
             'EnvironmentVariable' {
                 if ($Value -is [string] -or $Value -is [System.ValueType]) { $EnvOutput = $Value }
-                else { $EnvOutput = $Value | ConvertTo-CliXml }
+                else { $EnvOutput = [System.Management.Automation.PSSerializer]::Serialize($Value, 100) }
 
                 if ($EnvOutput.length -le 32767) {
                     $EnvName = ConvertTo-EnvironmentVariableCase -Name $Name
-                    $EnvOutput = Set-Content -Path "env:$EnvName" -Value $EnvOutput
+                    Set-Content -Path "env:$EnvName" -Value $EnvOutput
                     return $true
                 }
                 else { return $false }
             }
-            Default { throw [System.NotSupportedException] "CacheType not developed" }
+            # Default { throw [System.NotSupportedException] "CacheType not developed" }
         }
     }
 }

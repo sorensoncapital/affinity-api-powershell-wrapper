@@ -8,7 +8,10 @@ param(
         else { $true }
     })]
     [string]
-    $ObjectCacheType = 'ScriptVariable',
+    $ObjectCacheType = $(
+        if ($Env:AFFINITY_OBJECT_CACHE_TYPE) { $Env:AFFINITY_OBJECT_CACHE_TYPE }
+        else { 'ScriptVariable' }
+    ),
 
     # Setting cache type,
     [Parameter(Mandatory = $false,
@@ -19,14 +22,20 @@ param(
         else { $true }
     })]
     [string]
-    $SettingCacheType = 'ScriptVariable',
+    $SettingCacheType = $(
+        if ($Env:AFFINITY_SETTING_CACHE_TYPE) { $Env:AFFINITY_SETTING_CACHE_TYPE }
+        else { 'ScriptVariable' }
+    ),
 
     # Setting object type,
     [Parameter(Mandatory = $false,
     Position = 2)]
     [ValidateSet('Credential','String')]
     [string]
-    $SettingObjectType = 'Credential'
+    $SettingObjectType = $(
+        if ($Env:AFFINITY_SETTING_OBJECT_TYPE) { $Env:AFFINITY_SETTING_OBJECT_TYPE }
+        else { 'Credential' }
+    )
 )
 
 # Get public and private function definition files

@@ -52,9 +52,8 @@ function Set-AffinityObjectCache {
                 if ($Value -is [string] -or $Value -is [System.ValueType]) { $EnvOutput = $Value }
                 else { $EnvOutput = [System.Management.Automation.PSSerializer]::Serialize($Value, 100) }
 
-                if ($EnvOutput.length -le 32767) {
-                    $EnvName = ConvertTo-EnvironmentVariableCase -Name $Name
-                    Set-Content -Path "env:$EnvName" -Value $EnvOutput
+                if ($EnvOutput -and $EnvOutput.length -le 32767) {
+                    Set-Content -Path "env:$(ConvertTo-EnvironmentVariableCase -Name $Name)" -Value $EnvOutput
                     return $true
                 }
                 else { return $false }

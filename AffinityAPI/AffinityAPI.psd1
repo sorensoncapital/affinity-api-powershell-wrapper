@@ -12,7 +12,7 @@
 RootModule = 'AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.28'
+ModuleVersion = '0.0.29'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -132,7 +132,7 @@ PrivateData = @{
         IconUri = 'https://avatars0.githubusercontent.com/u/47189293'
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'v0.0.28 - Add option to set module settings with env'
+        ReleaseNotes = 'v0.0.29 - Fix PSVersion check'
 
     } # End of PSData hashtable
 

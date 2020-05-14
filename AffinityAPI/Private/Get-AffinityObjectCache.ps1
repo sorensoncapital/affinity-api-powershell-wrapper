@@ -28,7 +28,7 @@ function Get-AffinityObjectCache {
                    Position = 1)]
         [ValidateSet('ScriptVariable','EnvironmentVariable')]
         [ValidateScript({
-            if ($_ -eq 'EnvironmentVariable' -and (Get-PSVersion).PSVersion -lt 5.1 ) { $false }
+            if ($_ -eq 'EnvironmentVariable' -and $PSVersionTable.PSVersion -lt 5.1 ) { $false }
             else { $true }
         })]
         [string]

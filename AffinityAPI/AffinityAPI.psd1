@@ -12,7 +12,7 @@
 RootModule = 'AffinityAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.29'
+ModuleVersion = '0.0.30'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -132,7 +132,7 @@ PrivateData = @{
         IconUri = 'https://avatars0.githubusercontent.com/u/47189293'
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'v0.0.29 - Fix PSVersion check'
+        ReleaseNotes = 'v0.0.30 - Fix Get-AffinityFieldValue default parameter set'
 
     } # End of PSData hashtable
 

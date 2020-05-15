@@ -39,8 +39,7 @@
 #>
 function Get-AffinityFieldValue
 {
-    [CmdletBinding(PositionalBinding = $true,
-                   DefaultParameterSetName = 'OrganizationIDandListID')]
+    [CmdletBinding(PositionalBinding = $true)]
     [OutputType([System.Management.Automation.PSObject])]
     Param
     (
